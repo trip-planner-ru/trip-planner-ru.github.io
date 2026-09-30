@@ -1,0 +1,95 @@
+# Trip Planner
+
+Plan a trip in one place: see which airlines fly to a city, compare accommodation sites for your dates, and pin places on a map.
+The app has no live prices of its own. Its buttons open the airlines' official sites, Google Flights, Skyscanner
+and Booking.com, already filled in with your route, dates and travellers.
+
+The interface is in Russian. Countries and cities have a Russian `nameRu` for display in `locations.json`.
+Their English `name` is still used in searches (booking sites, Wikipedia). Airline and district names stay in
+their original spelling.
+
+## Run it
+
+Needs Node.js 18+.
+
+```bash
+npm install      # only the first time
+npm run dev      # open http://localhost:5173
+```
+
+Other commands: `npm run build` (production build to `dist/`), `npm run preview` (serve that build),
+`npm test` (offline tests), `npm run deploy` (build and publish to GitHub Pages).
+
+Live version: https://ray15bunk.github.io/trip-planner/
+
+No API keys are needed. The map uses OpenStreetMap tiles, and place search uses the free Nominatim geocoder,
+so the map tab needs an internet connection.
+
+## Features
+
+| Tab | What it does |
+|---|---|
+| ✈️ Airlines | Choose where you fly from and to, your dates and the number of travellers. The tab lists the airlines that fly **from your city to the destination**. It then **checks live which of them fly direct** (see below) and splits them into **Direct flights** and **Not direct**, marking seasonal routes. It also lists **what changed** compared with the saved list. Each airline has links to its **official site** and to **its flights** on Google Flights. The tab also has route links to **Google Flights** and **Skyscanner**, and a link to the destination city on **Booking.com**. |
+| 🏨 Stays | Choose the city, a district, your dates and the number of guests. The tab lists accommodation sites with a short explanation of each: what it is, what it's best for, and what to watch out for. The sites are Booking.com, Expedia, Hotels.com and Agoda; Airbnb and Vrbo; the price-comparison sites Google Hotels, Kayak and trivago; and Hostelworld. Each button opens the site's own live search. A label says what is already filled in: city, dates and guests; the city only; or nothing (the home page). **The app lists no hotels of its own and shows no prices**, because it has no exact prices. Real prices are on those sites. |
+| 🗺️ Map | Leaflet + OpenStreetMap. Search places or addresses, click anywhere to drop a pin, then give it a name, a type (attraction / meet-up / hotel / food / other) and a note. |
+| 🧳 My Trip | Trip summary (route, dates, travellers, nights) and your saved map pins. |
+
+The tabs share one trip. The destination city is where you look for a stay, and the travel dates are the check-in and check-out.
+Each tab has its own address (`#flights`, `#hotels`, `#map`, `#trip`), so it can be bookmarked. Everything saved (search, pins) is kept in
+`localStorage`, so it survives a reload.
+
+## Project structure
+
+```
+src/
+  data/                  structured JSON mock data
+    locations.json       countries → cities (airport, coordinates, districts, airlines, Wikipedia airport pages)
+    airports.json        airport names
+    airlines.json        airline directory: type, home country, brand color, official website
+  lib/
+    airlines.js          airline lookups
+    links.js             Booking.com / Google Flights / Skyscanner deep links
+    stays.js             accommodation sites: explanations and search links
+    locations.js         lookups + great-circle distance
+    format.js            dates, money, durations, shared stay dates
+    routeCheck.js        live direct-flight check against Wikipedia airport pages
+    pins.js              map pin categories and Leaflet icons
+  context/TripContext.jsx  shared trip state (search, saved items, pins, active tab)
+  hooks/useLocalStorage.js
+  components/            AirlinesTab, HotelsTab (Stays), HotelCard, MapTab, TripTab, LocationPicker, ui
+```
+
+### Direct-flight check
+
+The saved lists in `data/` say which airlines serve each city. They can't know for certain which routes are
+nonstop, and routes change. So every time you pick a route, the Airlines tab checks it live:
+
+1. It downloads the Wikipedia pages of the airports at **both ends** (listed in `wikiAirports` in
+   `locations.json`). It reads their **"Airlines and destinations"** tables, which list every airline's
+   scheduled nonstop destinations and are kept up to date by volunteers. Cargo tables are skipped. Charter-only
+   flights don't count, and seasonal flights are marked as seasonal.
+2. An airline is **direct** if either end's table lists it flying to the other city.
+3. The result is compared with the saved list, and the tab shows the changes: *now flies direct*, *no longer
+   flies direct*, or *flies direct but was not in the list for this route*.
+
+Pages are cached in the browser for 24 hours, and **Check again** reloads them. If a page can't be loaded
+(Wikipedia limits bursts of requests), the tab uses the pages it did get and says which were skipped. If no page
+can be loaded, it falls back to the saved list. The code is in `src/lib/routeCheck.js`, and the offline tests in
+`tests/` run with `npm test`.
+
+### Adding data
+
+- **New city:** add it under a country in `locations.json`, with its `airlines` list (codes from
+  `airlines.json`). If its airport code is new, add the airport to `airports.json`. Give it a `districts` list.
+- **New airline:** add it to `airlines.json`, then add its code to the `airlines` list of each city it flies to.
+  Give full-service airlines their `hubs`. An airline that flies to both cities is listed as nonstop when one
+  city is its hub. It is listed as connecting when a hub lies on a sensible path between them (the detour is
+  under 50%). Airlines without hubs are listed as low-cost, with "check route".
+- **Airline lists:** each city lists its main airlines, not every one. Routes and seasons change, so check
+  them from time to time.
+
+### Swapping in real APIs
+
+To show live prices inside the app, you need a data provider with an API key (for example SerpApi for
+Google Flights and Google Hotels, or Duffel for flights). Its calls should go through a small server-side
+proxy, so the key never ships to the browser.

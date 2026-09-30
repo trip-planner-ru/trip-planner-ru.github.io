@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Soft colour wash behind everything; cards sit on top as frosted surfaces. */
+body {
+  min-height: 100vh;
+  background-color: #f6f7fb;
+  background-image:
+    radial-gradient(60rem 30rem at 0% -10%, rgb(99 102 241 / 0.14), transparent 60%),
+    radial-gradient(50rem 28rem at 100% 0%, rgb(56 189 248 / 0.12), transparent 60%),
+    radial-gradient(40rem 30rem at 50% 110%, rgb(167 139 250 / 0.12), transparent 60%);
+  background-attachment: fixed;
+}
+
+/* Tab content fades in when you switch tabs. */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+.animate-fade-up {
+  animation: fade-up 0.35s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up {
+    animation: none;
+  }
+}
+
+.leaflet-container {
+  font: inherit;
+}
+.leaflet-popup-content-wrapper {
+  border-radius: 14px;
+  box-shadow: 0 12px 32px -12px rgb(15 23 42 / 0.35);
+}
+
+/* Custom map pins (Leaflet divIcon) */
+.pin {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  border: 2px solid white;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.35);
+}
+.pin > span {
+  transform: rotate(45deg);
+  font-size: 15px;
+  line-height: 1;
+}
+.pin--draft {
+  animation: pin-pulse 1.2s ease-in-out infinite;
+}
+@keyframes pin-pulse {
+  50% { box-shadow: 0 0 0 8px rgb(79 70 229 / 0.25); }
+}

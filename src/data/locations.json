@@ -1,0 +1,1159 @@
+{
+  "countries": [
+    {
+      "code": "IL",
+      "name": "Israel",
+      "cities": [
+        {
+          "id": "tel-aviv",
+          "name": "Tel Aviv",
+          "airport": "TLV",
+          "lat": 32.0853,
+          "lng": 34.7818,
+          "airlines": [
+            "LY",
+            "6H",
+            "IZ",
+            "AF",
+            "BA",
+            "LH",
+            "OS",
+            "LX",
+            "AZ",
+            "LO",
+            "A3",
+            "FZ",
+            "EY",
+            "W6",
+            "FR",
+            "UA",
+            "DL"
+          ],
+          "wikiAirports": [
+            "Ben Gurion Airport"
+          ],
+          "districts": [
+            "Beachfront",
+            "Jaffa",
+            "Neve Tzedek",
+            "Rothschild Boulevard"
+          ],
+          "nameRu": "Тель-Авив"
+        }
+      ],
+      "nameRu": "Израиль"
+    },
+    {
+      "code": "FR",
+      "name": "France",
+      "cities": [
+        {
+          "id": "paris",
+          "name": "Paris",
+          "airport": "CDG",
+          "lat": 48.8566,
+          "lng": 2.3522,
+          "airlines": [
+            "AF",
+            "KL",
+            "DL",
+            "UA",
+            "AA",
+            "LY",
+            "BA",
+            "LH",
+            "AZ",
+            "IB",
+            "TK",
+            "EK",
+            "QR",
+            "EY",
+            "NH",
+            "JL",
+            "TP",
+            "A3",
+            "OS",
+            "LX",
+            "SK",
+            "EI",
+            "LO",
+            "AC",
+            "CX",
+            "SQ",
+            "KE",
+            "U2",
+            "VY",
+            "HV",
+            "W6",
+            "FR"
+          ],
+          "wikiAirports": [
+            "Paris Charles de Gaulle Airport",
+            "Orly Airport",
+            "Beauvais–Tillé Airport"
+          ],
+          "wikiNames": [
+            "Beauvais"
+          ],
+          "districts": [
+            "Canal Saint-Martin",
+            "Champs-Élysées",
+            "Le Marais",
+            "Montmartre",
+            "Saint-Germain-des-Prés"
+          ],
+          "nameRu": "Париж"
+        },
+        {
+          "id": "nice",
+          "name": "Nice",
+          "airport": "NCE",
+          "lat": 43.7102,
+          "lng": 7.262,
+          "airlines": [
+            "AF",
+            "BA",
+            "LH",
+            "KL",
+            "DL",
+            "UA",
+            "EK",
+            "TK",
+            "LX",
+            "SK",
+            "EI",
+            "TP",
+            "U2",
+            "VY"
+          ],
+          "wikiAirports": [
+            "Nice Côte d'Azur Airport"
+          ],
+          "districts": [
+            "City Centre",
+            "Promenade des Anglais",
+            "Vieux Nice (Old Town)"
+          ],
+          "nameRu": "Ницца"
+        }
+      ],
+      "nameRu": "Франция"
+    },
+    {
+      "code": "GB",
+      "name": "United Kingdom",
+      "cities": [
+        {
+          "id": "london",
+          "name": "London",
+          "airport": "LHR",
+          "lat": 51.5074,
+          "lng": -0.1278,
+          "airlines": [
+            "BA",
+            "VS",
+            "AA",
+            "UA",
+            "DL",
+            "AF",
+            "KL",
+            "LH",
+            "AZ",
+            "IB",
+            "TK",
+            "EK",
+            "QR",
+            "EY",
+            "LY",
+            "NH",
+            "JL",
+            "TP",
+            "A3",
+            "OS",
+            "LX",
+            "SK",
+            "EI",
+            "LO",
+            "AC",
+            "CX",
+            "SQ",
+            "KE",
+            "B6",
+            "U2",
+            "VY",
+            "W6",
+            "FR",
+            "DY"
+          ],
+          "wikiAirports": [
+            "Heathrow Airport",
+            "Gatwick Airport",
+            "London Stansted Airport",
+            "Luton Airport"
+          ],
+          "districts": [
+            "Covent Garden",
+            "Kensington",
+            "Shoreditch",
+            "South Bank"
+          ],
+          "nameRu": "Лондон"
+        }
+      ],
+      "nameRu": "Великобритания"
+    },
+    {
+      "code": "IT",
+      "name": "Italy",
+      "cities": [
+        {
+          "id": "rome",
+          "name": "Rome",
+          "airport": "FCO",
+          "lat": 41.9028,
+          "lng": 12.4964,
+          "airlines": [
+            "AZ",
+            "AF",
+            "KL",
+            "LH",
+            "BA",
+            "IB",
+            "TK",
+            "EK",
+            "QR",
+            "EY",
+            "LY",
+            "DL",
+            "UA",
+            "AA",
+            "TP",
+            "A3",
+            "OS",
+            "LX",
+            "SK",
+            "LO",
+            "U2",
+            "VY",
+            "W6",
+            "FR"
+          ],
+          "wikiAirports": [
+            "Rome Fiumicino Airport",
+            "Ciampino Airport"
+          ],
+          "districts": [
+            "Centro Storico",
+            "Monti",
+            "Trastevere"
+          ],
+          "nameRu": "Рим"
+        },
+        {
+          "id": "milan",
+          "name": "Milan",
+          "airport": "MXP",
+          "lat": 45.4642,
+          "lng": 9.19,
+          "airlines": [
+            "AZ",
+            "AF",
+            "KL",
+            "LH",
+            "BA",
+            "IB",
+            "TK",
+            "EK",
+            "QR",
+            "EY",
+            "LY",
+            "DL",
+            "UA",
+            "AA",
+            "TP",
+            "A3",
+            "LX",
+            "OS",
+            "U2",
+            "VY",
+            "W6",
+            "FR"
+          ],
+          "wikiAirports": [
+            "Milan Malpensa Airport",
+            "Linate Airport",
+            "Orio al Serio International Airport"
+          ],
+          "wikiNames": [
+            "Bergamo"
+          ],
+          "districts": [
+            "Brera",
+            "Duomo",
+            "Quadrilatero della Moda"
+          ],
+          "nameRu": "Милан"
+        }
+      ],
+      "nameRu": "Италия"
+    },
+    {
+      "code": "ES",
+      "name": "Spain",
+      "cities": [
+        {
+          "id": "barcelona",
+          "name": "Barcelona",
+          "airport": "BCN",
+          "lat": 41.3874,
+          "lng": 2.1686,
+          "airlines": [
+            "VY",
+            "IB",
+            "UX",
+            "AF",
+            "KL",
+            "LH",
+            "BA",
+            "AZ",
+            "TK",
+            "EK",
+            "QR",
+            "LY",
+            "DL",
+            "UA",
+            "AA",
+            "TP",
+            "LX",
+            "OS",
+            "SK",
+            "EI",
+            "LO",
+            "U2",
+            "W6",
+            "FR",
+            "DY",
+            "HV",
+            "EW"
+          ],
+          "wikiAirports": [
+            "Josep Tarradellas Barcelona–El Prat Airport"
+          ],
+          "districts": [
+            "Barceloneta",
+            "Eixample",
+            "Gothic Quarter",
+            "Gràcia"
+          ],
+          "nameRu": "Барселона"
+        },
+        {
+          "id": "madrid",
+          "name": "Madrid",
+          "airport": "MAD",
+          "lat": 40.4168,
+          "lng": -3.7038,
+          "airlines": [
+            "IB",
+            "UX",
+            "AF",
+            "KL",
+            "LH",
+            "BA",
+            "AZ",
+            "TK",
+            "EK",
+            "QR",
+            "LY",
+            "DL",
+            "UA",
+            "AA",
+            "TP",
+            "LX",
+            "SK",
+            "EI",
+            "LO",
+            "U2",
+            "VY",
+            "FR",
+            "W6"
+          ],
+          "wikiAirports": [
+            "Adolfo Suárez Madrid–Barajas Airport"
+          ],
+          "districts": [
+            "Barrio de las Letras",
+            "Chueca",
+            "Sol"
+          ],
+          "nameRu": "Мадрид"
+        }
+      ],
+      "nameRu": "Испания"
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands",
+      "cities": [
+        {
+          "id": "amsterdam",
+          "name": "Amsterdam",
+          "airport": "AMS",
+          "lat": 52.3676,
+          "lng": 4.9041,
+          "airlines": [
+            "KL",
+            "HV",
+            "AF",
+            "DL",
+            "UA",
+            "AA",
+            "BA",
+            "LH",
+            "IB",
+            "AZ",
+            "TK",
+            "EK",
+            "QR",
+            "EY",
+            "LY",
+            "TP",
+            "A3",
+            "OS",
+            "LX",
+            "SK",
+            "EI",
+            "LO",
+            "CX",
+            "SQ",
+            "KE",
+            "U2",
+            "VY",
+            "DY",
+            "EW"
+          ],
+          "wikiAirports": [
+            "Amsterdam Airport Schiphol"
+          ],
+          "districts": [
+            "Canal Ring",
+            "De Pijp",
+            "Jordaan",
+            "Museum Quarter"
+          ],
+          "nameRu": "Амстердам"
+        }
+      ],
+      "nameRu": "Нидерланды"
+    },
+    {
+      "code": "US",
+      "name": "United States",
+      "cities": [
+        {
+          "id": "new-york",
+          "name": "New York",
+          "airport": "JFK",
+          "lat": 40.7128,
+          "lng": -74.006,
+          "airlines": [
+            "DL",
+            "AA",
+            "UA",
+            "B6",
+            "BA",
+            "VS",
+            "AF",
+            "KL",
+            "LH",
+            "AZ",
+            "IB",
+            "TK",
+            "EK",
+            "QR",
+            "EY",
+            "LY",
+            "NH",
+            "JL",
+            "TP",
+            "OS",
+            "LX",
+            "SK",
+            "EI",
+            "LO",
+            "AC",
+            "CX",
+            "SQ",
+            "KE",
+            "UX"
+          ],
+          "wikiAirports": [
+            "John F. Kennedy International Airport",
+            "Newark Liberty International Airport"
+          ],
+          "wikiNames": [
+            "Newark"
+          ],
+          "districts": [
+            "Meatpacking District",
+            "Midtown",
+            "SoHo",
+            "Williamsburg (Brooklyn)"
+          ],
+          "nameRu": "Нью-Йорк"
+        },
+        {
+          "id": "los-angeles",
+          "name": "Los Angeles",
+          "airport": "LAX",
+          "lat": 34.0522,
+          "lng": -118.2437,
+          "airlines": [
+            "AA",
+            "DL",
+            "UA",
+            "B6",
+            "BA",
+            "VS",
+            "AF",
+            "KL",
+            "LH",
+            "AZ",
+            "TK",
+            "EK",
+            "QR",
+            "LY",
+            "NH",
+            "JL",
+            "LX",
+            "SK",
+            "EI",
+            "AC",
+            "CX",
+            "SQ",
+            "KE"
+          ],
+          "wikiAirports": [
+            "Los Angeles International Airport"
+          ],
+          "districts": [
+            "Downtown",
+            "Hollywood",
+            "Santa Monica"
+          ],
+          "nameRu": "Лос-Анджелес"
+        }
+      ],
+      "nameRu": "США"
+    },
+    {
+      "code": "JP",
+      "name": "Japan",
+      "cities": [
+        {
+          "id": "tokyo",
+          "name": "Tokyo",
+          "airport": "HND",
+          "lat": 35.6762,
+          "lng": 139.6503,
+          "airlines": [
+            "NH",
+            "JL",
+            "AA",
+            "DL",
+            "UA",
+            "BA",
+            "AF",
+            "KL",
+            "LH",
+            "AZ",
+            "IB",
+            "TK",
+            "EK",
+            "QR",
+            "LX",
+            "SK",
+            "LO",
+            "AC",
+            "CX",
+            "SQ",
+            "KE"
+          ],
+          "wikiAirports": [
+            "Haneda Airport",
+            "Narita International Airport"
+          ],
+          "districts": [
+            "Asakusa",
+            "Ginza",
+            "Shibuya",
+            "Shinjuku"
+          ],
+          "nameRu": "Токио"
+        }
+      ],
+      "nameRu": "Япония"
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "cities": [
+        {
+          "id": "berlin",
+          "name": "Berlin",
+          "airport": "BER",
+          "lat": 52.52,
+          "lng": 13.405,
+          "airlines": [
+            "LH",
+            "EW",
+            "AF",
+            "KL",
+            "BA",
+            "AZ",
+            "IB",
+            "TK",
+            "QR",
+            "LY",
+            "DL",
+            "UA",
+            "TP",
+            "A3",
+            "OS",
+            "LX",
+            "SK",
+            "EI",
+            "LO",
+            "U2",
+            "VY",
+            "FR",
+            "DY"
+          ],
+          "wikiAirports": [
+            "Berlin Brandenburg Airport"
+          ],
+          "districts": [
+            "Charlottenburg",
+            "Friedrichshain",
+            "Mitte"
+          ],
+          "nameRu": "Берлин"
+        },
+        {
+          "id": "munich",
+          "name": "Munich",
+          "airport": "MUC",
+          "lat": 48.1351,
+          "lng": 11.582,
+          "airlines": [
+            "LH",
+            "EW",
+            "AF",
+            "KL",
+            "BA",
+            "AZ",
+            "IB",
+            "TK",
+            "EK",
+            "QR",
+            "EY",
+            "LY",
+            "DL",
+            "UA",
+            "AA",
+            "NH",
+            "TP",
+            "A3",
+            "OS",
+            "LX",
+            "SK",
+            "EI",
+            "LO",
+            "AC",
+            "SQ",
+            "U2",
+            "VY"
+          ],
+          "wikiAirports": [
+            "Munich Airport"
+          ],
+          "districts": [
+            "Altstadt",
+            "Hauptbahnhof"
+          ],
+          "nameRu": "Мюнхен"
+        }
+      ],
+      "nameRu": "Германия"
+    },
+    {
+      "code": "PT",
+      "name": "Portugal",
+      "cities": [
+        {
+          "id": "lisbon",
+          "name": "Lisbon",
+          "airport": "LIS",
+          "lat": 38.7223,
+          "lng": -9.1393,
+          "airlines": [
+            "TP",
+            "AF",
+            "KL",
+            "LH",
+            "BA",
+            "IB",
+            "AZ",
+            "TK",
+            "EK",
+            "QR",
+            "LY",
+            "DL",
+            "UA",
+            "AA",
+            "LX",
+            "SK",
+            "EI",
+            "LO",
+            "AC",
+            "U2",
+            "VY",
+            "FR",
+            "W6",
+            "HV",
+            "EW"
+          ],
+          "wikiAirports": [
+            "Lisbon Airport"
+          ],
+          "districts": [
+            "Alcântara",
+            "Alfama",
+            "Chiado & Bairro Alto"
+          ],
+          "nameRu": "Лиссабон"
+        },
+        {
+          "id": "porto",
+          "name": "Porto",
+          "airport": "OPO",
+          "lat": 41.1579,
+          "lng": -8.6291,
+          "airlines": [
+            "TP",
+            "AF",
+            "KL",
+            "LH",
+            "BA",
+            "IB",
+            "TK",
+            "LX",
+            "EI",
+            "UA",
+            "U2",
+            "VY",
+            "FR",
+            "HV",
+            "EW"
+          ],
+          "wikiAirports": [
+            "Porto Airport"
+          ],
+          "districts": [
+            "Miragaia",
+            "Ribeira",
+            "Vila Nova de Gaia"
+          ],
+          "nameRu": "Порту"
+        }
+      ],
+      "nameRu": "Португалия"
+    },
+    {
+      "code": "GR",
+      "name": "Greece",
+      "cities": [
+        {
+          "id": "athens",
+          "name": "Athens",
+          "airport": "ATH",
+          "lat": 37.9838,
+          "lng": 23.7275,
+          "airlines": [
+            "A3",
+            "AF",
+            "KL",
+            "LH",
+            "BA",
+            "AZ",
+            "IB",
+            "TK",
+            "EK",
+            "QR",
+            "EY",
+            "LY",
+            "DL",
+            "UA",
+            "AA",
+            "TP",
+            "OS",
+            "LX",
+            "SK",
+            "EI",
+            "LO",
+            "AC",
+            "U2",
+            "VY",
+            "W6",
+            "FR",
+            "EW",
+            "HV",
+            "6H",
+            "IZ",
+            "FZ"
+          ],
+          "wikiAirports": [
+            "Athens International Airport"
+          ],
+          "districts": [
+            "Acropolis (Makrygianni)",
+            "Plaka",
+            "Syntagma"
+          ],
+          "nameRu": "Афины"
+        }
+      ],
+      "nameRu": "Греция"
+    },
+    {
+      "code": "CZ",
+      "name": "Czech Republic",
+      "cities": [
+        {
+          "id": "prague",
+          "name": "Prague",
+          "airport": "PRG",
+          "lat": 50.0755,
+          "lng": 14.4378,
+          "airlines": [
+            "LH",
+            "AF",
+            "KL",
+            "BA",
+            "AZ",
+            "TK",
+            "EK",
+            "QR",
+            "LY",
+            "DL",
+            "A3",
+            "OS",
+            "LX",
+            "SK",
+            "LO",
+            "KE",
+            "U2",
+            "VY",
+            "W6",
+            "FR",
+            "EW"
+          ],
+          "wikiAirports": [
+            "Václav Havel Airport Prague"
+          ],
+          "districts": [
+            "Malá Strana",
+            "Old Town"
+          ],
+          "nameRu": "Прага"
+        }
+      ],
+      "nameRu": "Чехия"
+    },
+    {
+      "code": "AT",
+      "name": "Austria",
+      "cities": [
+        {
+          "id": "vienna",
+          "name": "Vienna",
+          "airport": "VIE",
+          "lat": 48.2082,
+          "lng": 16.3738,
+          "airlines": [
+            "OS",
+            "LH",
+            "AF",
+            "KL",
+            "BA",
+            "AZ",
+            "IB",
+            "TK",
+            "EK",
+            "QR",
+            "EY",
+            "LY",
+            "UA",
+            "NH",
+            "TP",
+            "A3",
+            "LX",
+            "SK",
+            "EI",
+            "LO",
+            "AC",
+            "KE",
+            "U2",
+            "VY",
+            "W6",
+            "FR",
+            "EW"
+          ],
+          "wikiAirports": [
+            "Vienna International Airport"
+          ],
+          "districts": [
+            "Innere Stadt",
+            "Landstraße (Belvedere)",
+            "Neubau"
+          ],
+          "nameRu": "Вена"
+        }
+      ],
+      "nameRu": "Австрия"
+    },
+    {
+      "code": "CH",
+      "name": "Switzerland",
+      "cities": [
+        {
+          "id": "zurich",
+          "name": "Zurich",
+          "airport": "ZRH",
+          "lat": 47.3769,
+          "lng": 8.5417,
+          "airlines": [
+            "LX",
+            "EW",
+            "LH",
+            "AF",
+            "KL",
+            "BA",
+            "AZ",
+            "IB",
+            "TK",
+            "EK",
+            "QR",
+            "EY",
+            "LY",
+            "DL",
+            "UA",
+            "AA",
+            "TP",
+            "A3",
+            "OS",
+            "SK",
+            "EI",
+            "LO",
+            "AC",
+            "SQ",
+            "U2",
+            "VY"
+          ],
+          "wikiAirports": [
+            "Zurich Airport"
+          ],
+          "wikiNames": [
+            "Zürich"
+          ],
+          "districts": [
+            "Altstadt",
+            "Langstrasse (Kreis 4)"
+          ],
+          "nameRu": "Цюрих"
+        }
+      ],
+      "nameRu": "Швейцария"
+    },
+    {
+      "code": "HU",
+      "name": "Hungary",
+      "cities": [
+        {
+          "id": "budapest",
+          "name": "Budapest",
+          "airport": "BUD",
+          "lat": 47.4979,
+          "lng": 19.0402,
+          "airlines": [
+            "W6",
+            "FR",
+            "LH",
+            "AF",
+            "KL",
+            "BA",
+            "AZ",
+            "TK",
+            "EK",
+            "QR",
+            "EY",
+            "LY",
+            "AA",
+            "TP",
+            "A3",
+            "OS",
+            "LX",
+            "SK",
+            "LO",
+            "AC",
+            "U2",
+            "VY",
+            "EW",
+            "FZ",
+            "6H"
+          ],
+          "wikiAirports": [
+            "Budapest Ferenc Liszt International Airport"
+          ],
+          "districts": [
+            "District V (Belváros-Lipótváros)",
+            "District VI (Terézváros)"
+          ],
+          "nameRu": "Будапешт"
+        }
+      ],
+      "nameRu": "Венгрия"
+    },
+    {
+      "code": "IE",
+      "name": "Ireland",
+      "cities": [
+        {
+          "id": "dublin",
+          "name": "Dublin",
+          "airport": "DUB",
+          "lat": 53.3498,
+          "lng": -6.2603,
+          "airlines": [
+            "EI",
+            "FR",
+            "BA",
+            "AF",
+            "KL",
+            "LH",
+            "IB",
+            "AZ",
+            "TK",
+            "EK",
+            "QR",
+            "EY",
+            "DL",
+            "UA",
+            "AA",
+            "TP",
+            "LX",
+            "SK",
+            "LO",
+            "AC",
+            "VY",
+            "EW"
+          ],
+          "wikiAirports": [
+            "Dublin Airport"
+          ],
+          "districts": [
+            "Smithfield",
+            "St Stephen's Green"
+          ],
+          "nameRu": "Дублин"
+        }
+      ],
+      "nameRu": "Ирландия"
+    },
+    {
+      "code": "DK",
+      "name": "Denmark",
+      "cities": [
+        {
+          "id": "copenhagen",
+          "name": "Copenhagen",
+          "airport": "CPH",
+          "lat": 55.6761,
+          "lng": 12.5683,
+          "airlines": [
+            "SK",
+            "DY",
+            "AF",
+            "KL",
+            "LH",
+            "BA",
+            "AZ",
+            "TK",
+            "EK",
+            "QR",
+            "DL",
+            "UA",
+            "TP",
+            "A3",
+            "OS",
+            "LX",
+            "EI",
+            "LO",
+            "SQ",
+            "U2",
+            "VY",
+            "FR",
+            "EW"
+          ],
+          "wikiAirports": [
+            "Copenhagen Airport"
+          ],
+          "districts": [
+            "Indre By",
+            "Tivoli & Vesterbro"
+          ],
+          "nameRu": "Копенгаген"
+        }
+      ],
+      "nameRu": "Дания"
+    },
+    {
+      "code": "HR",
+      "name": "Croatia",
+      "cities": [
+        {
+          "id": "split",
+          "name": "Split",
+          "airport": "SPU",
+          "lat": 43.5081,
+          "lng": 16.4402,
+          "airlines": [
+            "OU",
+            "LH",
+            "AF",
+            "KL",
+            "BA",
+            "LX",
+            "OS",
+            "SK",
+            "EW",
+            "U2",
+            "VY",
+            "FR",
+            "HV",
+            "DY"
+          ],
+          "wikiAirports": [
+            "Split Airport"
+          ],
+          "districts": [
+            "Bačvice",
+            "Old Town (Diocletian's Palace)"
+          ],
+          "nameRu": "Сплит"
+        }
+      ],
+      "nameRu": "Хорватия"
+    }
+  ]
+}

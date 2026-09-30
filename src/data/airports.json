@@ -1,0 +1,221 @@
+{
+  "_note": "utcOffset is a fixed approximation (no DST handling) used to show local arrival times.",
+  "airports": [
+    {
+      "code": "TLV",
+      "name": "Ben Gurion",
+      "city": "Tel Aviv",
+      "lat": 32.0114,
+      "lng": 34.8867,
+      "utcOffset": 3
+    },
+    {
+      "code": "CDG",
+      "name": "Charles de Gaulle",
+      "city": "Paris",
+      "lat": 49.0097,
+      "lng": 2.5479,
+      "utcOffset": 2
+    },
+    {
+      "code": "LHR",
+      "name": "Heathrow",
+      "city": "London",
+      "lat": 51.47,
+      "lng": -0.4543,
+      "utcOffset": 1
+    },
+    {
+      "code": "FCO",
+      "name": "Fiumicino",
+      "city": "Rome",
+      "lat": 41.8003,
+      "lng": 12.2389,
+      "utcOffset": 2
+    },
+    {
+      "code": "MXP",
+      "name": "Malpensa",
+      "city": "Milan",
+      "lat": 45.6301,
+      "lng": 8.7255,
+      "utcOffset": 2
+    },
+    {
+      "code": "BCN",
+      "name": "El Prat",
+      "city": "Barcelona",
+      "lat": 41.2974,
+      "lng": 2.0833,
+      "utcOffset": 2
+    },
+    {
+      "code": "AMS",
+      "name": "Schiphol",
+      "city": "Amsterdam",
+      "lat": 52.3105,
+      "lng": 4.7683,
+      "utcOffset": 2
+    },
+    {
+      "code": "JFK",
+      "name": "John F. Kennedy",
+      "city": "New York",
+      "lat": 40.6413,
+      "lng": -73.7781,
+      "utcOffset": -4
+    },
+    {
+      "code": "LAX",
+      "name": "Los Angeles Intl",
+      "city": "Los Angeles",
+      "lat": 33.9416,
+      "lng": -118.4085,
+      "utcOffset": -7
+    },
+    {
+      "code": "HND",
+      "name": "Haneda",
+      "city": "Tokyo",
+      "lat": 35.5494,
+      "lng": 139.7798,
+      "utcOffset": 9
+    },
+    {
+      "code": "FRA",
+      "name": "Frankfurt",
+      "city": "Frankfurt",
+      "lat": 50.0379,
+      "lng": 8.5622,
+      "utcOffset": 2
+    },
+    {
+      "code": "IST",
+      "name": "Istanbul",
+      "city": "Istanbul",
+      "lat": 41.2753,
+      "lng": 28.7519,
+      "utcOffset": 3
+    },
+    {
+      "code": "DXB",
+      "name": "Dubai Intl",
+      "city": "Dubai",
+      "lat": 25.2532,
+      "lng": 55.3657,
+      "utcOffset": 4
+    },
+    {
+      "code": "MAD",
+      "name": "Barajas",
+      "city": "Madrid",
+      "lat": 40.4983,
+      "lng": -3.5676,
+      "utcOffset": 2
+    },
+    {
+      "code": "NCE",
+      "name": "Côte d'Azur",
+      "city": "Nice",
+      "lat": 43.6584,
+      "lng": 7.2159,
+      "utcOffset": 2
+    },
+    {
+      "code": "BER",
+      "name": "Brandenburg",
+      "city": "Berlin",
+      "lat": 52.3667,
+      "lng": 13.5033,
+      "utcOffset": 2
+    },
+    {
+      "code": "MUC",
+      "name": "Munich",
+      "city": "Munich",
+      "lat": 48.3538,
+      "lng": 11.7861,
+      "utcOffset": 2
+    },
+    {
+      "code": "LIS",
+      "name": "Humberto Delgado",
+      "city": "Lisbon",
+      "lat": 38.7742,
+      "lng": -9.1342,
+      "utcOffset": 1
+    },
+    {
+      "code": "OPO",
+      "name": "Francisco Sá Carneiro",
+      "city": "Porto",
+      "lat": 41.2481,
+      "lng": -8.6814,
+      "utcOffset": 1
+    },
+    {
+      "code": "ATH",
+      "name": "Eleftherios Venizelos",
+      "city": "Athens",
+      "lat": 37.9364,
+      "lng": 23.9445,
+      "utcOffset": 3
+    },
+    {
+      "code": "PRG",
+      "name": "Václav Havel",
+      "city": "Prague",
+      "lat": 50.1008,
+      "lng": 14.26,
+      "utcOffset": 2
+    },
+    {
+      "code": "VIE",
+      "name": "Vienna Intl",
+      "city": "Vienna",
+      "lat": 48.1103,
+      "lng": 16.5697,
+      "utcOffset": 2
+    },
+    {
+      "code": "ZRH",
+      "name": "Zurich",
+      "city": "Zurich",
+      "lat": 47.4582,
+      "lng": 8.5555,
+      "utcOffset": 2
+    },
+    {
+      "code": "BUD",
+      "name": "Ferenc Liszt",
+      "city": "Budapest",
+      "lat": 47.4398,
+      "lng": 19.2611,
+      "utcOffset": 2
+    },
+    {
+      "code": "DUB",
+      "name": "Dublin",
+      "city": "Dublin",
+      "lat": 53.4264,
+      "lng": -6.2499,
+      "utcOffset": 1
+    },
+    {
+      "code": "CPH",
+      "name": "Kastrup",
+      "city": "Copenhagen",
+      "lat": 55.618,
+      "lng": 12.656,
+      "utcOffset": 2
+    },
+    {
+      "code": "SPU",
+      "name": "Split",
+      "city": "Split",
+      "lat": 43.5389,
+      "lng": 16.298,
+      "utcOffset": 2
+    }
+  ]
+}
