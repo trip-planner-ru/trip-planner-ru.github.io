@@ -16,7 +16,7 @@ const normalize = (s) =>
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-/** Parse one airport page into [{ airline, destinations: [{ label, seasonal, charter }] }]. Cargo tables are skipped. */
+/** Parse one airport page into [{ airline, destinations: [{ label, seasonal, charter, page? }] }]. Cargo tables are skipped. */
 export function parseAirlinesAndDestinations(html) {
   const doc = new DOMParser().parseFromString(html, 'text/html');
   const heading = doc.getElementById('Airlines_and_destinations');
@@ -46,7 +46,11 @@ export function parseAirlinesAndDestinations(html) {
           seasonal = t.includes('seasonal');
           charter = t.includes('charter');
         } else if (el.textContent.trim()) {
-          destinations.push({ label: el.textContent.trim(), seasonal, charter });
+          const dest = { label: el.textContent.trim(), seasonal, charter };
+          // Link target = the destination airport's Wikipedia article (used to look up its IATA code).
+          const href = el.getAttribute('href');
+          if (href?.startsWith('./')) dest.page = decodeURIComponent(href.slice(2).split('#')[0]).replaceAll('_', ' ');
+          destinations.push(dest);
         }
       }
       rows.push({ airline, destinations });
@@ -130,7 +134,7 @@ export async function checkNonstop(origin, dest, directory, { force = false, sig
       const hits = row.destinations.filter((d) => labelMatchesCity(d.label, lookFor));
       if (hits.length === 0) continue;
       const airline = directory.find((a) => wikiNameMatchesAirline(row.airline, a));
-      const key = airline?.code ?? row.airline;
+      const key = airline?.code ?? normalize(row.airline); // Wikipedia spells some names differently across pages
       const prev = found.get(key);
       const yearRound = hits.some((h) => !h.seasonal && !h.charter);
       const scheduled = hits.some((h) => !h.charter);

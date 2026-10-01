@@ -39,6 +39,30 @@
             "Rothschild Boulevard"
           ],
           "nameRu": "Тель-Авив"
+        },
+        {
+          "id": "eilat",
+          "name": "Eilat",
+          "airport": "ETM",
+          "lat": 29.5577,
+          "lng": 34.9519,
+          "airlines": [
+            "LY",
+            "6H",
+            "IZ"
+          ],
+          "wikiAirports": [
+            "Ramon Airport"
+          ],
+          "districts": [
+            "North Beach",
+            "Coral Beach",
+            "City Centre"
+          ],
+          "nameRu": "Эйлат",
+          "wikiNames": [
+            "Ramon"
+          ]
         }
       ],
       "nameRu": "Израиль"
@@ -293,6 +317,86 @@
             "Quadrilatero della Moda"
           ],
           "nameRu": "Милан"
+        },
+        {
+          "id": "venice",
+          "name": "Venice",
+          "airport": "VCE",
+          "lat": 45.4408,
+          "lng": 12.3155,
+          "airlines": [
+            "AZ",
+            "AF",
+            "KL",
+            "LH",
+            "BA",
+            "IB",
+            "OS",
+            "LX",
+            "SK",
+            "TP",
+            "A3",
+            "LO",
+            "TK",
+            "EK",
+            "QR",
+            "DL",
+            "UA",
+            "AA",
+            "U2",
+            "VY",
+            "W6",
+            "FR",
+            "EW",
+            "HV"
+          ],
+          "wikiAirports": [
+            "Venice Marco Polo Airport",
+            "Treviso Airport"
+          ],
+          "districts": [
+            "San Marco",
+            "Cannaregio",
+            "Dorsoduro",
+            "Lido"
+          ],
+          "nameRu": "Венеция"
+        },
+        {
+          "id": "naples",
+          "name": "Naples",
+          "airport": "NAP",
+          "lat": 40.8518,
+          "lng": 14.2681,
+          "airlines": [
+            "AZ",
+            "AF",
+            "KL",
+            "LH",
+            "BA",
+            "IB",
+            "A3",
+            "TK",
+            "DL",
+            "UA",
+            "6H",
+            "U2",
+            "VY",
+            "W6",
+            "FR",
+            "EW",
+            "HV"
+          ],
+          "wikiAirports": [
+            "Naples International Airport"
+          ],
+          "districts": [
+            "Centro Storico",
+            "Chiaia",
+            "Spanish Quarter",
+            "Vomero"
+          ],
+          "nameRu": "Неаполь"
         }
       ],
       "nameRu": "Италия"
@@ -387,6 +491,43 @@
             "Sol"
           ],
           "nameRu": "Мадрид"
+        },
+        {
+          "id": "malaga",
+          "name": "Malaga",
+          "airport": "AGP",
+          "lat": 36.7213,
+          "lng": -4.4214,
+          "airlines": [
+            "IB",
+            "VY",
+            "UX",
+            "KL",
+            "LH",
+            "BA",
+            "SK",
+            "DY",
+            "AY",
+            "LO",
+            "TK",
+            "UA",
+            "U2",
+            "FR",
+            "W6",
+            "EW",
+            "HV",
+            "EI"
+          ],
+          "wikiAirports": [
+            "Málaga Airport"
+          ],
+          "districts": [
+            "Historic Centre",
+            "Soho",
+            "La Malagueta",
+            "Pedregalejo"
+          ],
+          "nameRu": "Малага"
         }
       ],
       "nameRu": "Испания"
@@ -542,6 +683,44 @@
             "Santa Monica"
           ],
           "nameRu": "Лос-Анджелес"
+        },
+        {
+          "id": "miami",
+          "name": "Miami",
+          "airport": "MIA",
+          "lat": 25.7617,
+          "lng": -80.1918,
+          "airlines": [
+            "AA",
+            "DL",
+            "UA",
+            "B6",
+            "AC",
+            "LY",
+            "AF",
+            "KL",
+            "LH",
+            "BA",
+            "VS",
+            "AZ",
+            "IB",
+            "UX",
+            "LX",
+            "TP",
+            "TK",
+            "EK",
+            "QR"
+          ],
+          "wikiAirports": [
+            "Miami International Airport"
+          ],
+          "districts": [
+            "South Beach",
+            "Brickell",
+            "Downtown",
+            "Wynwood"
+          ],
+          "nameRu": "Майами"
         }
       ],
       "nameRu": "США"
@@ -682,6 +861,63 @@
             "Hauptbahnhof"
           ],
           "nameRu": "Мюнхен"
+        },
+        {
+          "id": "frankfurt",
+          "name": "Frankfurt",
+          "airport": "FRA",
+          "lat": 50.1109,
+          "lng": 8.6821,
+          "airlines": [
+            "LH",
+            "AF",
+            "KL",
+            "BA",
+            "AZ",
+            "IB",
+            "UX",
+            "OS",
+            "LX",
+            "SK",
+            "A3",
+            "TP",
+            "LO",
+            "AY",
+            "JU",
+            "FB",
+            "RO",
+            "J2",
+            "A9",
+            "TK",
+            "PC",
+            "EK",
+            "EY",
+            "QR",
+            "LY",
+            "DL",
+            "UA",
+            "AA",
+            "AC",
+            "KE",
+            "CX",
+            "SQ",
+            "JL",
+            "NH",
+            "TG",
+            "MS",
+            "EI",
+            "SN"
+          ],
+          "wikiAirports": [
+            "Frankfurt Airport"
+          ],
+          "districts": [
+            "Altstadt (Römer)",
+            "Sachsenhausen",
+            "Westend",
+            "Bahnhofsviertel"
+          ],
+          "nameRu": "Франкфурт"
         }
       ],
       "nameRu": "Германия"
@@ -821,6 +1057,75 @@
             "Syntagma"
           ],
           "nameRu": "Афины"
+        },
+        {
+          "id": "thessaloniki",
+          "name": "Thessaloniki",
+          "airport": "SKG",
+          "lat": 40.6401,
+          "lng": 22.9444,
+          "airlines": [
+            "A3",
+            "LH",
+            "OS",
+            "LX",
+            "TK",
+            "PC",
+            "LO",
+            "LY",
+            "6H",
+            "IZ",
+            "U2",
+            "FR",
+            "W6",
+            "EW"
+          ],
+          "wikiAirports": [
+            "Thessaloniki Airport"
+          ],
+          "districts": [
+            "Ladadika",
+            "Ano Poli",
+            "Kalamaria",
+            "Aristotelous Square"
+          ],
+          "nameRu": "Салоники"
+        },
+        {
+          "id": "heraklion",
+          "name": "Heraklion",
+          "airport": "HER",
+          "lat": 35.3387,
+          "lng": 25.1442,
+          "airlines": [
+            "A3",
+            "LH",
+            "OS",
+            "LX",
+            "SK",
+            "DY",
+            "AY",
+            "BT",
+            "LY",
+            "6H",
+            "IZ",
+            "U2",
+            "FR",
+            "W6",
+            "EW",
+            "VY",
+            "HV",
+            "BA"
+          ],
+          "wikiAirports": [
+            "Heraklion International Airport \"Nikos Kazantzakis\""
+          ],
+          "districts": [
+            "Old Town",
+            "Hersonissos",
+            "Amoudara"
+          ],
+          "nameRu": "Ираклион"
         }
       ],
       "nameRu": "Греция"
@@ -1151,9 +1456,1089 @@
             "Old Town (Diocletian's Palace)"
           ],
           "nameRu": "Сплит"
+        },
+        {
+          "id": "dubrovnik",
+          "name": "Dubrovnik",
+          "airport": "DBV",
+          "lat": 42.6507,
+          "lng": 18.0944,
+          "airlines": [
+            "OU",
+            "LH",
+            "AF",
+            "BA",
+            "LX",
+            "OS",
+            "SK",
+            "DY",
+            "TK",
+            "UA",
+            "IB",
+            "VY",
+            "U2",
+            "FR",
+            "EW",
+            "HV",
+            "EI"
+          ],
+          "wikiAirports": [
+            "Dubrovnik Airport"
+          ],
+          "districts": [
+            "Old Town",
+            "Lapad",
+            "Ploče",
+            "Gruž"
+          ],
+          "nameRu": "Дубровник"
         }
       ],
       "nameRu": "Хорватия"
+    },
+    {
+      "code": "TR",
+      "name": "Turkey",
+      "cities": [
+        {
+          "id": "istanbul",
+          "name": "Istanbul",
+          "airport": "IST",
+          "lat": 41.0082,
+          "lng": 28.9784,
+          "airlines": [
+            "TK",
+            "PC",
+            "VF",
+            "AF",
+            "KL",
+            "LH",
+            "BA",
+            "AZ",
+            "IB",
+            "OS",
+            "LX",
+            "SK",
+            "LO",
+            "A3",
+            "TP",
+            "EK",
+            "EY",
+            "QR",
+            "FZ",
+            "G9",
+            "DL",
+            "UA",
+            "AA",
+            "AC",
+            "KE",
+            "SQ",
+            "CX",
+            "JL",
+            "NH",
+            "J2",
+            "A9",
+            "JU",
+            "FB",
+            "RO",
+            "AY",
+            "BT",
+            "SN",
+            "MS",
+            "TG",
+            "W6",
+            "EW",
+            "U2",
+            "VY",
+            "DY",
+            "HV",
+            "XQ"
+          ],
+          "wikiAirports": [
+            "Istanbul Airport",
+            "Sabiha Gökçen International Airport"
+          ],
+          "districts": [
+            "Sultanahmet",
+            "Beyoğlu (Taksim)",
+            "Karaköy",
+            "Kadıköy"
+          ],
+          "nameRu": "Стамбул"
+        },
+        {
+          "id": "antalya",
+          "name": "Antalya",
+          "airport": "AYT",
+          "lat": 36.8969,
+          "lng": 30.7133,
+          "airlines": [
+            "TK",
+            "PC",
+            "VF",
+            "XQ",
+            "LH",
+            "EW",
+            "U2",
+            "FR",
+            "W6",
+            "DY",
+            "LO",
+            "AY",
+            "SK",
+            "BT",
+            "SN"
+          ],
+          "wikiAirports": [
+            "Antalya Airport"
+          ],
+          "districts": [
+            "Kaleiçi (Old Town)",
+            "Lara",
+            "Konyaaltı",
+            "Belek"
+          ],
+          "nameRu": "Анталья"
+        }
+      ],
+      "nameRu": "Турция"
+    },
+    {
+      "code": "AE",
+      "name": "United Arab Emirates",
+      "cities": [
+        {
+          "id": "dubai",
+          "name": "Dubai",
+          "airport": "DXB",
+          "lat": 25.2048,
+          "lng": 55.2708,
+          "airlines": [
+            "EK",
+            "FZ",
+            "LY",
+            "6H",
+            "IZ",
+            "AF",
+            "KL",
+            "LH",
+            "BA",
+            "VS",
+            "AZ",
+            "IB",
+            "OS",
+            "LX",
+            "SK",
+            "LO",
+            "A3",
+            "TP",
+            "TK",
+            "PC",
+            "QR",
+            "G9",
+            "DL",
+            "UA",
+            "AA",
+            "AC",
+            "KE",
+            "SQ",
+            "CX",
+            "JL",
+            "NH",
+            "TG",
+            "MS",
+            "J2",
+            "A9",
+            "JU",
+            "FB",
+            "RO",
+            "AY",
+            "BT",
+            "SN",
+            "W6"
+          ],
+          "wikiAirports": [
+            "Dubai International Airport",
+            "Al Maktoum International Airport"
+          ],
+          "districts": [
+            "Downtown Dubai",
+            "Dubai Marina",
+            "Deira",
+            "Palm Jumeirah",
+            "Jumeirah"
+          ],
+          "nameRu": "Дубай"
+        },
+        {
+          "id": "abu-dhabi",
+          "name": "Abu Dhabi",
+          "airport": "AUH",
+          "lat": 24.4539,
+          "lng": 54.3773,
+          "airlines": [
+            "EY",
+            "G9",
+            "LY",
+            "6H",
+            "AF",
+            "KL",
+            "LH",
+            "BA",
+            "TK",
+            "PC",
+            "MS"
+          ],
+          "wikiAirports": [
+            "Zayed International Airport"
+          ],
+          "districts": [
+            "Corniche",
+            "Saadiyat Island",
+            "Yas Island",
+            "Al Maryah Island"
+          ],
+          "nameRu": "Абу-Даби"
+        }
+      ],
+      "nameRu": "ОАЭ"
+    },
+    {
+      "code": "GE",
+      "name": "Georgia",
+      "cities": [
+        {
+          "id": "tbilisi",
+          "name": "Tbilisi",
+          "airport": "TBS",
+          "lat": 41.7151,
+          "lng": 44.8271,
+          "airlines": [
+            "A9",
+            "TK",
+            "PC",
+            "VF",
+            "LH",
+            "LO",
+            "W6",
+            "6H",
+            "IZ",
+            "LY",
+            "FZ",
+            "G9",
+            "QR",
+            "J2",
+            "BT",
+            "A3"
+          ],
+          "wikiAirports": [
+            "Tbilisi International Airport"
+          ],
+          "districts": [
+            "Old Tbilisi",
+            "Sololaki",
+            "Vake",
+            "Vera"
+          ],
+          "nameRu": "Тбилиси"
+        },
+        {
+          "id": "batumi",
+          "name": "Batumi",
+          "airport": "BUS",
+          "lat": 41.6168,
+          "lng": 41.6367,
+          "airlines": [
+            "TK",
+            "PC",
+            "VF",
+            "A9",
+            "6H",
+            "IZ",
+            "LO"
+          ],
+          "wikiAirports": [
+            "Batumi International Airport"
+          ],
+          "districts": [
+            "Old Batumi",
+            "Batumi Boulevard",
+            "New Boulevard"
+          ],
+          "nameRu": "Батуми"
+        }
+      ],
+      "nameRu": "Грузия"
+    },
+    {
+      "code": "CY",
+      "name": "Cyprus",
+      "cities": [
+        {
+          "id": "larnaca",
+          "name": "Larnaca",
+          "airport": "LCA",
+          "lat": 34.9003,
+          "lng": 33.6232,
+          "airlines": [
+            "CY",
+            "LY",
+            "6H",
+            "IZ",
+            "A3",
+            "BA",
+            "LH",
+            "LX",
+            "OS",
+            "LO",
+            "AF",
+            "EK",
+            "EY",
+            "QR",
+            "FZ",
+            "G9",
+            "W6",
+            "FR",
+            "U2",
+            "MS",
+            "JU"
+          ],
+          "wikiAirports": [
+            "Larnaca International Airport"
+          ],
+          "districts": [
+            "Finikoudes",
+            "Mackenzie Beach",
+            "City Centre"
+          ],
+          "nameRu": "Ларнака"
+        },
+        {
+          "id": "paphos",
+          "name": "Paphos",
+          "airport": "PFO",
+          "lat": 34.7754,
+          "lng": 32.4245,
+          "airlines": [
+            "FR",
+            "W6",
+            "U2",
+            "6H",
+            "IZ",
+            "LY",
+            "A3"
+          ],
+          "wikiAirports": [
+            "Paphos International Airport"
+          ],
+          "districts": [
+            "Kato Paphos (Harbour)",
+            "Coral Bay",
+            "Old Town (Ktima)"
+          ],
+          "nameRu": "Пафос"
+        }
+      ],
+      "nameRu": "Кипр"
+    },
+    {
+      "code": "TH",
+      "name": "Thailand",
+      "cities": [
+        {
+          "id": "bangkok",
+          "name": "Bangkok",
+          "airport": "BKK",
+          "lat": 13.7563,
+          "lng": 100.5018,
+          "airlines": [
+            "TG",
+            "LY",
+            "EK",
+            "EY",
+            "QR",
+            "FZ",
+            "TK",
+            "LH",
+            "LX",
+            "AY",
+            "LO",
+            "KE",
+            "CX",
+            "SQ",
+            "JL",
+            "NH",
+            "MS",
+            "G9"
+          ],
+          "wikiAirports": [
+            "Suvarnabhumi Airport",
+            "Don Mueang International Airport"
+          ],
+          "districts": [
+            "Sukhumvit",
+            "Silom",
+            "Riverside",
+            "Siam"
+          ],
+          "nameRu": "Бангкок"
+        },
+        {
+          "id": "phuket",
+          "name": "Phuket",
+          "airport": "HKT",
+          "lat": 7.8804,
+          "lng": 98.3923,
+          "airlines": [
+            "TG",
+            "EK",
+            "QR",
+            "EY",
+            "TK",
+            "SQ",
+            "CX",
+            "KE",
+            "AY"
+          ],
+          "wikiAirports": [
+            "Phuket International Airport"
+          ],
+          "districts": [
+            "Patong",
+            "Kata & Karon",
+            "Old Phuket Town",
+            "Kamala"
+          ],
+          "nameRu": "Пхукет"
+        }
+      ],
+      "nameRu": "Таиланд"
+    },
+    {
+      "code": "EG",
+      "name": "Egypt",
+      "cities": [
+        {
+          "id": "cairo",
+          "name": "Cairo",
+          "airport": "CAI",
+          "lat": 30.0444,
+          "lng": 31.2357,
+          "airlines": [
+            "MS",
+            "EK",
+            "EY",
+            "QR",
+            "FZ",
+            "G9",
+            "TK",
+            "PC",
+            "AF",
+            "KL",
+            "LH",
+            "BA",
+            "AZ",
+            "IB",
+            "OS",
+            "LX",
+            "A3"
+          ],
+          "wikiAirports": [
+            "Cairo International Airport"
+          ],
+          "districts": [
+            "Downtown",
+            "Zamalek",
+            "Giza",
+            "Garden City"
+          ],
+          "nameRu": "Каир"
+        },
+        {
+          "id": "sharm-el-sheikh",
+          "name": "Sharm El Sheikh",
+          "airport": "SSH",
+          "lat": 27.9158,
+          "lng": 34.33,
+          "airlines": [
+            "MS",
+            "TK",
+            "W6",
+            "G9",
+            "IZ",
+            "6H"
+          ],
+          "wikiAirports": [
+            "Sharm El Sheikh International Airport"
+          ],
+          "districts": [
+            "Naama Bay",
+            "Sharks Bay",
+            "Nabq Bay",
+            "Hadaba"
+          ],
+          "nameRu": "Шарм-эш-Шейх"
+        }
+      ],
+      "nameRu": "Египет"
+    },
+    {
+      "code": "PL",
+      "name": "Poland",
+      "cities": [
+        {
+          "id": "warsaw",
+          "name": "Warsaw",
+          "airport": "WAW",
+          "lat": 52.2297,
+          "lng": 21.0122,
+          "airlines": [
+            "LO",
+            "LH",
+            "AF",
+            "KL",
+            "BA",
+            "AZ",
+            "IB",
+            "OS",
+            "LX",
+            "SK",
+            "A3",
+            "TP",
+            "AY",
+            "BT",
+            "TK",
+            "PC",
+            "EK",
+            "QR",
+            "EY",
+            "LY",
+            "AC",
+            "W6",
+            "FR",
+            "EW",
+            "DY",
+            "JU",
+            "FB",
+            "RO",
+            "J2",
+            "A9",
+            "MS"
+          ],
+          "wikiAirports": [
+            "Warsaw Chopin Airport",
+            "Warsaw Modlin Airport"
+          ],
+          "districts": [
+            "Old Town (Stare Miasto)",
+            "Śródmieście",
+            "Praga"
+          ],
+          "nameRu": "Варшава"
+        },
+        {
+          "id": "krakow",
+          "name": "Krakow",
+          "airport": "KRK",
+          "lat": 50.0647,
+          "lng": 19.945,
+          "airlines": [
+            "LO",
+            "LH",
+            "AF",
+            "KL",
+            "BA",
+            "LX",
+            "SK",
+            "AY",
+            "TK",
+            "FZ",
+            "LY",
+            "W6",
+            "FR",
+            "EW",
+            "DY",
+            "U2",
+            "VY"
+          ],
+          "wikiAirports": [
+            "Kraków John Paul II International Airport"
+          ],
+          "districts": [
+            "Old Town (Stare Miasto)",
+            "Kazimierz",
+            "Podgórze"
+          ],
+          "nameRu": "Краков"
+        }
+      ],
+      "nameRu": "Польша"
+    },
+    {
+      "code": "BE",
+      "name": "Belgium",
+      "cities": [
+        {
+          "id": "brussels",
+          "name": "Brussels",
+          "airport": "BRU",
+          "lat": 50.8503,
+          "lng": 4.3517,
+          "airlines": [
+            "SN",
+            "LH",
+            "AF",
+            "KL",
+            "BA",
+            "AZ",
+            "IB",
+            "OS",
+            "LX",
+            "SK",
+            "A3",
+            "TP",
+            "AY",
+            "LO",
+            "TK",
+            "PC",
+            "EK",
+            "EY",
+            "QR",
+            "LY",
+            "UA",
+            "DL",
+            "AA",
+            "AC",
+            "JU",
+            "FB",
+            "MS",
+            "FR",
+            "W6",
+            "VY"
+          ],
+          "wikiAirports": [
+            "Brussels Airport",
+            "Brussels South Charleroi Airport"
+          ],
+          "districts": [
+            "Grand-Place (Centre)",
+            "European Quarter",
+            "Ixelles",
+            "Saint-Gilles"
+          ],
+          "nameRu": "Брюссель",
+          "wikiNames": [
+            "Charleroi"
+          ]
+        }
+      ],
+      "nameRu": "Бельгия"
+    },
+    {
+      "code": "SE",
+      "name": "Sweden",
+      "cities": [
+        {
+          "id": "stockholm",
+          "name": "Stockholm",
+          "airport": "ARN",
+          "lat": 59.3293,
+          "lng": 18.0686,
+          "airlines": [
+            "SK",
+            "DY",
+            "LH",
+            "AF",
+            "KL",
+            "BA",
+            "LX",
+            "OS",
+            "LO",
+            "AY",
+            "TK",
+            "PC",
+            "EK",
+            "EY",
+            "QR",
+            "UA",
+            "DL",
+            "FR",
+            "W6"
+          ],
+          "wikiAirports": [
+            "Stockholm Arlanda Airport",
+            "Stockholm Skavsta Airport"
+          ],
+          "districts": [
+            "Gamla Stan",
+            "Norrmalm",
+            "Södermalm",
+            "Östermalm"
+          ],
+          "nameRu": "Стокгольм"
+        }
+      ],
+      "nameRu": "Швеция"
+    },
+    {
+      "code": "NO",
+      "name": "Norway",
+      "cities": [
+        {
+          "id": "oslo",
+          "name": "Oslo",
+          "airport": "OSL",
+          "lat": 59.9139,
+          "lng": 10.7522,
+          "airlines": [
+            "SK",
+            "DY",
+            "LH",
+            "AF",
+            "KL",
+            "BA",
+            "LX",
+            "OS",
+            "LO",
+            "AY",
+            "TK",
+            "QR",
+            "EK",
+            "W6"
+          ],
+          "wikiAirports": [
+            "Oslo Airport, Gardermoen"
+          ],
+          "districts": [
+            "Sentrum",
+            "Aker Brygge",
+            "Grünerløkka",
+            "Frogner"
+          ],
+          "nameRu": "Осло"
+        }
+      ],
+      "nameRu": "Норвегия"
+    },
+    {
+      "code": "FI",
+      "name": "Finland",
+      "cities": [
+        {
+          "id": "helsinki",
+          "name": "Helsinki",
+          "airport": "HEL",
+          "lat": 60.1699,
+          "lng": 24.9384,
+          "airlines": [
+            "AY",
+            "SK",
+            "DY",
+            "LH",
+            "AF",
+            "KL",
+            "BA",
+            "LX",
+            "OS",
+            "LO",
+            "TK",
+            "PC",
+            "QR",
+            "JL",
+            "BT",
+            "FR",
+            "EW"
+          ],
+          "wikiAirports": [
+            "Helsinki Airport"
+          ],
+          "districts": [
+            "Kamppi",
+            "Kruununhaka",
+            "Kallio",
+            "Eira"
+          ],
+          "nameRu": "Хельсинки"
+        }
+      ],
+      "nameRu": "Финляндия"
+    },
+    {
+      "code": "RO",
+      "name": "Romania",
+      "cities": [
+        {
+          "id": "bucharest",
+          "name": "Bucharest",
+          "airport": "OTP",
+          "lat": 44.4268,
+          "lng": 26.1025,
+          "airlines": [
+            "RO",
+            "LH",
+            "AF",
+            "KL",
+            "BA",
+            "AZ",
+            "IB",
+            "OS",
+            "LX",
+            "A3",
+            "LO",
+            "TK",
+            "PC",
+            "EK",
+            "QR",
+            "FZ",
+            "LY",
+            "6H",
+            "IZ",
+            "W6",
+            "FR"
+          ],
+          "wikiAirports": [
+            "Bucharest Henri Coandă International Airport"
+          ],
+          "districts": [
+            "Old Town (Lipscani)",
+            "Piața Romană",
+            "Herăstrău"
+          ],
+          "nameRu": "Бухарест"
+        }
+      ],
+      "nameRu": "Румыния"
+    },
+    {
+      "code": "BG",
+      "name": "Bulgaria",
+      "cities": [
+        {
+          "id": "sofia",
+          "name": "Sofia",
+          "airport": "SOF",
+          "lat": 42.6977,
+          "lng": 23.3219,
+          "airlines": [
+            "FB",
+            "LH",
+            "BA",
+            "OS",
+            "LX",
+            "A3",
+            "LO",
+            "TK",
+            "PC",
+            "QR",
+            "FZ",
+            "LY",
+            "6H",
+            "IZ",
+            "W6",
+            "FR",
+            "EW"
+          ],
+          "wikiAirports": [
+            "Sofia Airport"
+          ],
+          "districts": [
+            "City Centre (Vitosha Blvd)",
+            "Lozenets",
+            "Oborishte"
+          ],
+          "nameRu": "София"
+        }
+      ],
+      "nameRu": "Болгария"
+    },
+    {
+      "code": "RS",
+      "name": "Serbia",
+      "cities": [
+        {
+          "id": "belgrade",
+          "name": "Belgrade",
+          "airport": "BEG",
+          "lat": 44.7866,
+          "lng": 20.4489,
+          "airlines": [
+            "JU",
+            "LH",
+            "AF",
+            "OS",
+            "LX",
+            "A3",
+            "LO",
+            "TK",
+            "PC",
+            "QR",
+            "EK",
+            "FZ",
+            "LY",
+            "6H",
+            "W6",
+            "EW",
+            "U2"
+          ],
+          "wikiAirports": [
+            "Belgrade Nikola Tesla Airport"
+          ],
+          "districts": [
+            "Stari Grad",
+            "Savamala",
+            "Vračar",
+            "Dorćol"
+          ],
+          "nameRu": "Белград"
+        }
+      ],
+      "nameRu": "Сербия"
+    },
+    {
+      "code": "ME",
+      "name": "Montenegro",
+      "cities": [
+        {
+          "id": "tivat",
+          "name": "Tivat",
+          "airport": "TIV",
+          "lat": 42.43,
+          "lng": 18.699,
+          "airlines": [
+            "JU",
+            "U2",
+            "BA",
+            "TK"
+          ],
+          "wikiAirports": [
+            "Tivat Airport"
+          ],
+          "districts": [
+            "Porto Montenegro",
+            "Kotor Old Town",
+            "Budva"
+          ],
+          "nameRu": "Тиват"
+        }
+      ],
+      "nameRu": "Черногория"
+    },
+    {
+      "code": "AM",
+      "name": "Armenia",
+      "cities": [
+        {
+          "id": "yerevan",
+          "name": "Yerevan",
+          "airport": "EVN",
+          "lat": 40.1872,
+          "lng": 44.5152,
+          "airlines": [
+            "LO",
+            "AF",
+            "OS",
+            "A3",
+            "TK",
+            "FZ",
+            "G9",
+            "W6",
+            "BT",
+            "QR"
+          ],
+          "wikiAirports": [
+            "Zvartnots International Airport"
+          ],
+          "districts": [
+            "Kentron",
+            "Cascade",
+            "Arabkir"
+          ],
+          "nameRu": "Ереван"
+        }
+      ],
+      "nameRu": "Армения"
+    },
+    {
+      "code": "AZ",
+      "name": "Azerbaijan",
+      "cities": [
+        {
+          "id": "baku",
+          "name": "Baku",
+          "airport": "GYD",
+          "lat": 40.4093,
+          "lng": 49.8671,
+          "airlines": [
+            "J2",
+            "TK",
+            "PC",
+            "LH",
+            "QR",
+            "FZ",
+            "G9",
+            "W6",
+            "6H"
+          ],
+          "wikiAirports": [
+            "Heydar Aliyev International Airport"
+          ],
+          "districts": [
+            "Old City (İçərişəhər)",
+            "Fountain Square",
+            "Seaside Boulevard"
+          ],
+          "nameRu": "Баку"
+        }
+      ],
+      "nameRu": "Азербайджан"
+    },
+    {
+      "code": "CA",
+      "name": "Canada",
+      "cities": [
+        {
+          "id": "toronto",
+          "name": "Toronto",
+          "airport": "YYZ",
+          "lat": 43.6532,
+          "lng": -79.3832,
+          "airlines": [
+            "AC",
+            "AA",
+            "DL",
+            "UA",
+            "LY",
+            "AF",
+            "KL",
+            "LH",
+            "BA",
+            "VS",
+            "AZ",
+            "OS",
+            "LX",
+            "LO",
+            "TP",
+            "TK",
+            "EK",
+            "EY",
+            "KE",
+            "CX",
+            "EI",
+            "MS"
+          ],
+          "wikiAirports": [
+            "Toronto Pearson International Airport"
+          ],
+          "districts": [
+            "Downtown",
+            "Yorkville",
+            "Entertainment District",
+            "Kensington Market"
+          ],
+          "nameRu": "Торонто"
+        }
+      ],
+      "nameRu": "Канада"
     }
   ]
 }

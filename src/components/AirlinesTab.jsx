@@ -4,7 +4,9 @@ import { airlines as directory, airlinesForRoute, applyNonstopCheck } from '../l
 import { addDays, plural, stayFromSearch, todayISO } from '../lib/format';
 import { bookingCityUrl, googleFlightsUrl, skyscannerUrl } from '../lib/links';
 import { cityById } from '../lib/locations';
+import { directCityIds, israeliOriginFor } from '../lib/israelDestinations';
 import { checkNonstop } from '../lib/routeCheck';
+import IsraelDestinations from './IsraelDestinations';
 import LocationPicker from './LocationPicker';
 import { Badge, Button, Card, EmptyState, ExternalLink, Field, inputClass, SectionTitle } from './ui';
 
@@ -42,6 +44,8 @@ const HUB_RU = {
   Lisbon: 'Лиссабон', Athens: 'Афины', Warsaw: 'Варшаву', Zagreb: 'Загреб', Istanbul: 'Стамбул', Dubai: 'Дубай',
   'Abu Dhabi': 'Абу-Даби', Doha: 'Доху', 'New York': 'Нью-Йорк', Atlanta: 'Атланту', Dallas: 'Даллас', Chicago: 'Чикаго',
   'Los Angeles': 'Лос-Анджелес', Toronto: 'Торонто', Tokyo: 'Токио', Seoul: 'Сеул', 'Hong Kong': 'Гонконг', Singapore: 'Сингапур',
+  Antalya: 'Анталью', Tbilisi: 'Тбилиси', Bangkok: 'Бангкок', Cairo: 'Каир', Brussels: 'Брюссель', Helsinki: 'Хельсинки',
+  Bucharest: 'Бухарест', Sofia: 'Софию', Belgrade: 'Белград', Baku: 'Баку', Riga: 'Ригу', Larnaca: 'Ларнаку', Sharjah: 'Шарджу',
 };
 const via = (a) => `через ${a.via.map((h) => HUB_RU[h] ?? h).join(' или ')}`;
 
@@ -56,6 +60,8 @@ export default function AirlinesTab() {
   const checked = !sameCity && check.status === 'done' ? applyNonstopCheck(route, check.result) : null;
   const flightsUrl = (airlineName) => googleFlightsUrl(origin.airport, dest.airport, search, airlineName);
   const routeLabel = `${origin.label} → ${dest.label}`;
+  const israeliOrigin = israeliOriginFor(origin);
+  const nonstopFromIsrael = israeliOrigin ? directCityIds(israeliOrigin) : null;
 
   const total = checked
     ? checked.direct.length + checked.notDirect.length
@@ -77,7 +83,12 @@ export default function AirlinesTab() {
           >
             ⇄
           </Button>
-          <LocationPicker label="Куда" cityId={destinationCityId} onChange={(id) => updateSearch({ destinationCityId: id })} />
+          <LocationPicker
+            label="Куда"
+            cityId={destinationCityId}
+            onChange={(id) => updateSearch({ destinationCityId: id })}
+            marked={nonstopFromIsrael}
+          />
         </div>
 
         <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -123,7 +134,21 @@ export default function AirlinesTab() {
             </select>
           </Field>
         </div>
+        {nonstopFromIsrael && (
+          <p className="mt-3 text-xs text-slate-500">✈ — есть прямой рейс из аэропорта {israeliOrigin} (по данным Википедии).</p>
+        )}
       </Card>
+
+      {israeliOrigin && (
+        <IsraelDestinations
+          from={israeliOrigin}
+          search={search}
+          onPickCity={(id) => {
+            updateSearch({ destinationCityId: id });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
+      )}
 
       {sameCity ? (
         <EmptyState title="Город вылета и город назначения совпадают">Выберите другой город назначения.</EmptyState>

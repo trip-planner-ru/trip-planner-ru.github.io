@@ -66,3 +66,18 @@ test('reports changes between the saved list and the check', () => {
   assert.deepEqual(r.notDirect.map((a) => a.code), ['LY']);
   assert.deepEqual(r.changes.map((c) => `${c.airline.code}:${c.kind}`).sort(), ['LH:nowDirect', 'LY:noLongerDirect']);
 });
+
+test('the same unknown airline spelled two ways is listed once', async () => {
+  const page = (row) => `<section><h2 id="Airlines_and_destinations">A</h2><table>${row}</table></section>`;
+  const pages = {
+    A: page('<tr><td><a>BlueBird Airways</a></td><td><a>Larnaca</a></td></tr>'),
+    B: page('<tr><td><a>Bluebird Airways</a></td><td><a>Tel Aviv</a></td></tr>'),
+  };
+  globalThis.localStorage = { getItem: () => null, setItem: () => {} };
+  globalThis.fetch = async (url) => ({ ok: true, status: 200, text: async () => pages[url.at(-1)] });
+  const { checkNonstop } = await import('../src/lib/routeCheck.js');
+  const origin = { id: 'tlv', name: 'Tel Aviv', wikiAirports: ['A'] };
+  const dest = { id: 'lca', name: 'Larnaca', wikiAirports: ['B'] };
+  const r = await checkNonstop(origin, dest, []);
+  assert.equal(r.direct.length, 1);
+});

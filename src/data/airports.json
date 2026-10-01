@@ -216,6 +216,254 @@
       "lat": 43.5389,
       "lng": 16.298,
       "utcOffset": 2
+    },
+    {
+      "code": "AYT",
+      "name": "Antalya",
+      "city": "Antalya",
+      "lat": 36.8987,
+      "lng": 30.8005,
+      "utcOffset": 3
+    },
+    {
+      "code": "AUH",
+      "name": "Zayed Intl",
+      "city": "Abu Dhabi",
+      "lat": 24.433,
+      "lng": 54.6511,
+      "utcOffset": 4
+    },
+    {
+      "code": "TBS",
+      "name": "Tbilisi Intl",
+      "city": "Tbilisi",
+      "lat": 41.6692,
+      "lng": 44.9547,
+      "utcOffset": 4
+    },
+    {
+      "code": "BUS",
+      "name": "Batumi Intl",
+      "city": "Batumi",
+      "lat": 41.6103,
+      "lng": 41.5997,
+      "utcOffset": 4
+    },
+    {
+      "code": "LCA",
+      "name": "Larnaca Intl",
+      "city": "Larnaca",
+      "lat": 34.8751,
+      "lng": 33.6249,
+      "utcOffset": 3
+    },
+    {
+      "code": "PFO",
+      "name": "Paphos Intl",
+      "city": "Paphos",
+      "lat": 34.718,
+      "lng": 32.4857,
+      "utcOffset": 3
+    },
+    {
+      "code": "BKK",
+      "name": "Suvarnabhumi",
+      "city": "Bangkok",
+      "lat": 13.69,
+      "lng": 100.7501,
+      "utcOffset": 7
+    },
+    {
+      "code": "HKT",
+      "name": "Phuket Intl",
+      "city": "Phuket",
+      "lat": 8.1132,
+      "lng": 98.3169,
+      "utcOffset": 7
+    },
+    {
+      "code": "CAI",
+      "name": "Cairo Intl",
+      "city": "Cairo",
+      "lat": 30.1219,
+      "lng": 31.4056,
+      "utcOffset": 3
+    },
+    {
+      "code": "SSH",
+      "name": "Sharm El Sheikh Intl",
+      "city": "Sharm El Sheikh",
+      "lat": 27.9773,
+      "lng": 34.395,
+      "utcOffset": 3
+    },
+    {
+      "code": "WAW",
+      "name": "Chopin",
+      "city": "Warsaw",
+      "lat": 52.1657,
+      "lng": 20.9671,
+      "utcOffset": 2
+    },
+    {
+      "code": "KRK",
+      "name": "Kraków John Paul II",
+      "city": "Krakow",
+      "lat": 50.0777,
+      "lng": 19.7848,
+      "utcOffset": 2
+    },
+    {
+      "code": "BRU",
+      "name": "Brussels",
+      "city": "Brussels",
+      "lat": 50.901,
+      "lng": 4.4844,
+      "utcOffset": 2
+    },
+    {
+      "code": "ARN",
+      "name": "Arlanda",
+      "city": "Stockholm",
+      "lat": 59.6519,
+      "lng": 17.9186,
+      "utcOffset": 2
+    },
+    {
+      "code": "OSL",
+      "name": "Gardermoen",
+      "city": "Oslo",
+      "lat": 60.1976,
+      "lng": 11.1004,
+      "utcOffset": 2
+    },
+    {
+      "code": "HEL",
+      "name": "Helsinki",
+      "city": "Helsinki",
+      "lat": 60.3172,
+      "lng": 24.9633,
+      "utcOffset": 3
+    },
+    {
+      "code": "OTP",
+      "name": "Henri Coandă",
+      "city": "Bucharest",
+      "lat": 44.5711,
+      "lng": 26.085,
+      "utcOffset": 3
+    },
+    {
+      "code": "SOF",
+      "name": "Sofia",
+      "city": "Sofia",
+      "lat": 42.6967,
+      "lng": 23.4114,
+      "utcOffset": 3
+    },
+    {
+      "code": "BEG",
+      "name": "Nikola Tesla",
+      "city": "Belgrade",
+      "lat": 44.8184,
+      "lng": 20.3091,
+      "utcOffset": 2
+    },
+    {
+      "code": "TIV",
+      "name": "Tivat",
+      "city": "Tivat",
+      "lat": 42.4047,
+      "lng": 18.7233,
+      "utcOffset": 2
+    },
+    {
+      "code": "EVN",
+      "name": "Zvartnots",
+      "city": "Yerevan",
+      "lat": 40.1473,
+      "lng": 44.3959,
+      "utcOffset": 4
+    },
+    {
+      "code": "GYD",
+      "name": "Heydar Aliyev",
+      "city": "Baku",
+      "lat": 40.4675,
+      "lng": 50.0467,
+      "utcOffset": 4
+    },
+    {
+      "code": "YYZ",
+      "name": "Pearson",
+      "city": "Toronto",
+      "lat": 43.6777,
+      "lng": -79.6248,
+      "utcOffset": -4
+    },
+    {
+      "code": "VCE",
+      "name": "Marco Polo",
+      "city": "Venice",
+      "lat": 45.5053,
+      "lng": 12.3519,
+      "utcOffset": 2
+    },
+    {
+      "code": "NAP",
+      "name": "Capodichino",
+      "city": "Naples",
+      "lat": 40.886,
+      "lng": 14.2908,
+      "utcOffset": 2
+    },
+    {
+      "code": "AGP",
+      "name": "Málaga",
+      "city": "Malaga",
+      "lat": 36.6749,
+      "lng": -4.4991,
+      "utcOffset": 2
+    },
+    {
+      "code": "SKG",
+      "name": "Makedonia",
+      "city": "Thessaloniki",
+      "lat": 40.5197,
+      "lng": 22.9709,
+      "utcOffset": 3
+    },
+    {
+      "code": "HER",
+      "name": "Nikos Kazantzakis",
+      "city": "Heraklion",
+      "lat": 35.3397,
+      "lng": 25.1803,
+      "utcOffset": 3
+    },
+    {
+      "code": "ETM",
+      "name": "Ramon",
+      "city": "Eilat",
+      "lat": 29.7275,
+      "lng": 35.0114,
+      "utcOffset": 3
+    },
+    {
+      "code": "MIA",
+      "name": "Miami Intl",
+      "city": "Miami",
+      "lat": 25.7959,
+      "lng": -80.287,
+      "utcOffset": -4
+    },
+    {
+      "code": "DBV",
+      "name": "Dubrovnik",
+      "city": "Dubrovnik",
+      "lat": 42.5614,
+      "lng": 18.2682,
+      "utcOffset": 2
     }
   ]
 }

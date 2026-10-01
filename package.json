@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "deploy": "vite build && gh-pages -d dist"
+    "deploy": "vite build && gh-pages -d dist",
+    "update:israel": "node scripts/build-israel-destinations.mjs"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
