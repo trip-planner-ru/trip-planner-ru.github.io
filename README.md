@@ -20,7 +20,7 @@ npm run dev      # open http://localhost:5173
 Other commands: `npm run build` (production build to `dist/`), `npm run preview` (serve that build),
 `npm test` (offline tests), `npm run deploy` (build and publish to GitHub Pages).
 
-Live version: https://ray15bunk.github.io/trip-planner/
+Live version: https://trip-planner-ru.github.io/
 
 No API keys are needed. The map uses OpenStreetMap tiles, and place search uses the free Nominatim geocoder,
 so the map tab needs an internet connection.
