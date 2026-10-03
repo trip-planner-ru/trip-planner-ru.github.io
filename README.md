@@ -19,7 +19,8 @@ npm run dev      # open http://localhost:5173
 
 Other commands: `npm run build` (production build to `dist/`), `npm run preview` (serve that build),
 `npm test` (offline tests), `npm run deploy` (build and publish to GitHub Pages),
-`npm run update:israel` (refresh the nonstop destinations from Israel).
+`npm run update:israel` (refresh the nonstop destinations from Israel), `npm run update:places` (refresh map
+search suggestions).
 
 Live version: https://trip-planner-ru.github.io/
 
@@ -51,6 +52,7 @@ src/
     airlines.js          airline lookups
     links.js             Booking.com / Google Flights / Skyscanner deep links
     stays.js             accommodation sites: explanations and search links
+    placeHints.js        map search suggestions (known sights + Photon)
     locations.js         lookups + great-circle distance
     format.js            dates, money, durations, shared stay dates
     routeCheck.js        live direct-flight check against Wikipedia airport pages
@@ -59,6 +61,22 @@ src/
   hooks/useLocalStorage.js
   components/            AirlinesTab, HotelsTab (Stays), HotelCard, MapTab, TripTab, LocationPicker, ui
 ```
+
+### Map search suggestions
+
+While you type in the map's search box, suggestions appear. They come from two sources:
+
+- **Sights of the trip's city** from `src/data/place_hints.json`: about 20 per city, with Russian and English
+  names, coordinates and a type such as Музей or Собор. They show up instantly, work offline and match Russian or
+  English input. The box suggests the city's best-known sights as soon as you click into it. The file is
+  generated from Wikidata by `scripts/build-place-hints.mjs`. To refresh it, run `npm run update:places`; a run
+  that stops part-way continues the next time, or add `-- --fresh` to start over.
+- **Addresses, hotels and cafés** near the city from [Photon](https://photon.komoot.io), an OpenStreetMap search
+  built for search-as-you-type. It is asked only after typing pauses, and only for Latin queries of three or
+  more letters, because Photon has no Russian names.
+
+Use ↑/↓ to move through the suggestions and Enter to pick one. Enter with nothing highlighted, or the **Найти**
+button, runs a full Nominatim search.
 
 ### Nonstop destinations from Israel
 

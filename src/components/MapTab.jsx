@@ -3,6 +3,7 @@ import { MapContainer, Marker, Popup, TileLayer, useMap, useMapEvents } from 're
 import { useTrip } from '../context/TripContext';
 import { cityById } from '../lib/locations';
 import { PIN_CATEGORIES, pinIcon } from '../lib/pins';
+import MapSearch from './MapSearch';
 import { Button, Card, Field, inputClass } from './ui';
 
 // Free OSM geocoder. Its usage policy allows on-submit search, not search-as-you-type.
@@ -31,7 +32,6 @@ export default function MapTab() {
   const city = cityById(search.destinationCityId);
   const [focus, setFocus] = useState(mapFocus);
   const [draft, setDraft] = useState(null);
-  const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [status, setStatus] = useState({ loading: false, error: null });
   const abortRef = useRef(null);
@@ -47,14 +47,12 @@ export default function MapTab() {
 
   const flyTo = (lat, lng, zoom = 16) => setFocus({ lat, lng, zoom, at: Date.now() });
 
-  async function runSearch(e) {
-    e.preventDefault();
-    if (!query.trim()) return;
+  async function runSearch(query) {
     abortRef.current?.abort();
     abortRef.current = new AbortController();
     setStatus({ loading: true, error: null });
     try {
-      const found = await geocode(query.trim(), abortRef.current.signal);
+      const found = await geocode(query, abortRef.current.signal);
       setResults(found);
       setStatus({ loading: false, error: found.length ? null : 'Ничего не найдено.' });
     } catch (err) {
@@ -111,18 +109,18 @@ export default function MapTab() {
       </Card>
 
       <div className="space-y-4">
-        <Card className="p-4">
-          <form onSubmit={runSearch} className="flex gap-2">
-            <input
-              className={inputClass}
-              placeholder="Место или адрес, например «Лувр»"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-            <Button type="submit" variant="primary" disabled={status.loading}>
-              {status.loading ? '…' : 'Найти'}
-            </Button>
-          </form>
+        {/* Raised above the cards below it, so the suggestion list isn't drawn underneath them. */}
+        <Card className="relative z-20 p-4">
+          <MapSearch
+            city={city}
+            loading={status.loading}
+            onSearch={runSearch}
+            onPick={({ name, lat, lng }) => {
+              setResults([]);
+              flyTo(lat, lng);
+              setDraft({ lat, lng, name, category: 'attraction', note: '' });
+            }}
+          />
           {status.error && <p className="mt-2 text-sm text-rose-600">{status.error}</p>}
           {results.length > 0 && (
             <ul className="mt-3 max-h-56 divide-y divide-slate-100 overflow-y-auto text-sm">
