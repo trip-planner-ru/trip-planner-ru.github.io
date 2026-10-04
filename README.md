@@ -53,6 +53,7 @@ src/
     links.js             Booking.com / Google Flights / Skyscanner deep links
     stays.js             accommodation sites: explanations and search links
     placeHints.js        map search suggestions (known sights + Photon)
+    routing.js           routes between pins, Google Maps and WhatsApp links
     locations.js         lookups + great-circle distance
     format.js            dates, money, durations, shared stay dates
     routeCheck.js        live direct-flight check against Wikipedia airport pages
@@ -61,6 +62,18 @@ src/
   hooks/useLocalStorage.js
   components/            AirlinesTab, HotelsTab (Stays), HotelCard, MapTab, TripTab, LocationPicker, ui
 ```
+
+### Routes between pins
+
+The Map tab's **Маршрут по меткам** panel routes between the saved pins of one city. A pin belongs to the nearest
+city in the app within 60 km. You can choose walking, driving or cycling, untick stops, and reorder them with
+↑/↓. **Оптимальный порядок** finds the shortest visiting order and keeps the first stop as the start. The route
+is drawn on the map with numbered stops, along with the total and per-leg distance and time.
+
+**Отправить в WhatsApp** opens WhatsApp with a ready message: the stops, the distances, and a Google Maps link
+that opens the whole route on the recipient's phone. **Скопировать** copies the same text. Routing comes from
+the free OpenStreetMap service at routing.openstreetmap.de (OSRM), and the code is in `src/lib/routing.js`. A
+route takes up to 10 stops, because that is what a Google Maps directions link accepts.
 
 ### Map search suggestions
 

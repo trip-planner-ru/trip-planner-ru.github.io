@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { MapContainer, Marker, Popup, TileLayer, useMap, useMapEvents } from 'react-leaflet';
+import { MapContainer, Marker, Polyline, Popup, TileLayer, Tooltip, useMap, useMapEvents } from 'react-leaflet';
 import { useTrip } from '../context/TripContext';
 import { cityById } from '../lib/locations';
 import { PIN_CATEGORIES, pinIcon } from '../lib/pins';
 import MapSearch from './MapSearch';
+import RoutePlanner from './RoutePlanner';
 import { Button, Card, Field, inputClass } from './ui';
 
 // Free OSM geocoder. Its usage policy allows on-submit search, not search-as-you-type.
@@ -22,6 +23,16 @@ function FocusController({ focus }) {
   return null;
 }
 
+/** Zoom the map to a newly built route (once per set of stops, not on every rebuild). */
+function FitRoute({ route }) {
+  const map = useMap();
+  const key = route?.stopIds.join();
+  useEffect(() => {
+    if (route?.line.length) map.fitBounds(route.line, { padding: [40, 40], maxZoom: 16 });
+  }, [key, map]); // eslint-disable-line react-hooks/exhaustive-deps
+  return null;
+}
+
 function ClickToPin({ onPick }) {
   useMapEvents({ click: (e) => onPick(e.latlng) });
   return null;
@@ -33,6 +44,7 @@ export default function MapTab() {
   const [focus, setFocus] = useState(mapFocus);
   const [draft, setDraft] = useState(null);
   const [results, setResults] = useState([]);
+  const [route, setRoute] = useState(null); // { line, stopIds } drawn on the map
   const [status, setStatus] = useState({ loading: false, error: null });
   const abortRef = useRef(null);
   const draftRef = useRef(null);
@@ -86,8 +98,21 @@ export default function MapTab() {
           <FocusController focus={focus} />
           <ClickToPin onPick={({ lat, lng }) => setDraft((d) => ({ name: '', category: 'attraction', note: '', ...d, lat, lng }))} />
 
+          {route && (
+            <>
+              <Polyline positions={route.line} pathOptions={{ color: '#ffffff', weight: 9, opacity: 0.9 }} />
+              <Polyline positions={route.line} pathOptions={{ color: '#4f46e5', weight: 5, opacity: 0.9 }} />
+            </>
+          )}
+          <FitRoute route={route} />
+
           {markers.map((m) => (
             <Marker key={m.id} position={[m.lat, m.lng]} icon={pinIcon(m.category)}>
+              {route?.stopIds.includes(m.id) && (
+                <Tooltip permanent direction="top" offset={[0, -30]} className="route-stop">
+                  {route.stopIds.indexOf(m.id) + 1}
+                </Tooltip>
+              )}
               <Popup>
                 <p className="!m-0 font-semibold">{m.name}</p>
                 <p className="!m-0 text-xs text-slate-500">{PIN_CATEGORIES[m.category]?.label}</p>
@@ -138,6 +163,13 @@ export default function MapTab() {
             ⌖ Показать город {city.label}
           </Button>
         </Card>
+
+        <RoutePlanner
+          markers={markers}
+          preferredCityId={city.id}
+          onRouteChange={setRoute}
+          onFocusPin={(pin) => flyTo(pin.lat, pin.lng)}
+        />
 
         {draft && (
           <Card className="p-4 ring-2 ring-indigo-500/40">
