@@ -24,8 +24,8 @@ search suggestions).
 
 Live version: https://trip-planner-ru.github.io/
 
-No API keys are needed. The map uses OpenStreetMap tiles, and place search uses the free Nominatim geocoder,
-so the map tab needs an internet connection.
+No API keys are needed. The map uses OpenFreeMap vector tiles, place search uses the free Nominatim geocoder, and routes use the
+OpenStreetMap routing service and Transitous, so the Map tab needs an internet connection.
 
 ## Features
 
@@ -33,7 +33,7 @@ so the map tab needs an internet connection.
 |---|---|
 | ✈️ Airlines | Choose where you fly from and to, your dates and the number of travellers. The tab lists the airlines that fly **from your city to the destination**. It then **checks live which of them fly direct** (see below) and splits them into **Direct flights** and **Not direct**, marking seasonal routes. It also lists **what changed** compared with the saved list. Each airline has links to its **official site** and to **its flights** on Google Flights. The tab also has route links to **Google Flights** and **Skyscanner**, and a link to the destination city on **Booking.com**. |
 | 🏨 Stays | Choose the city, a district, your dates and the number of guests. The tab lists accommodation sites with a short explanation of each: what it is, what it's best for, and what to watch out for. The sites are Booking.com, Expedia, Hotels.com and Agoda; Airbnb and Vrbo; the price-comparison sites Google Hotels, Kayak and trivago; and Hostelworld. Each button opens the site's own live search. A label says what is already filled in: city, dates and guests; the city only; or nothing (the home page). **The app lists no hotels of its own and shows no prices**, because it has no exact prices. Real prices are on those sites. |
-| 🗺️ Map | Leaflet + OpenStreetMap. Search places or addresses, click anywhere to drop a pin, then give it a name, a type (attraction / meet-up / hotel / food / other) and a note. |
+| 🗺️ Map | 3D map (MapLibre + OpenFreeMap vector tiles, with 3D buildings and Russian labels where available). The **3D/2D** button tilts it or flattens it. Search places or addresses, click anywhere to drop a pin, then give it a name, a type (attraction / meet-up / hotel / food / other) and a note. |
 | 🧳 My Trip | Trip summary (route, dates, travellers, nights) and your saved map pins. |
 
 The tabs share one trip. The destination city is where you look for a stay, and the travel dates are the check-in and check-out.
@@ -54,10 +54,11 @@ src/
     stays.js             accommodation sites: explanations and search links
     placeHints.js        map search suggestions (known sights + Photon)
     routing.js           routes between pins, Google Maps and WhatsApp links
+    transit.js           public-transport journeys (Transitous)
     locations.js         lookups + great-circle distance
     format.js            dates, money, durations, shared stay dates
     routeCheck.js        live direct-flight check against Wikipedia airport pages
-    pins.js              map pin categories and Leaflet icons
+    pins.js              map pin categories (colour, emoji, Russian name)
   context/TripContext.jsx  shared trip state (search, saved items, pins, active tab)
   hooks/useLocalStorage.js
   components/            AirlinesTab, HotelsTab (Stays), HotelCard, MapTab, TripTab, LocationPicker, ui
@@ -66,13 +67,21 @@ src/
 ### Routes between pins
 
 The Map tab's **Маршрут по меткам** panel routes between the saved pins of one city. A pin belongs to the nearest
-city in the app within 60 km. You can choose walking, driving or cycling, untick stops, and reorder them with
+city in the app within 60 km. You can choose walking, driving, cycling or **public transport**, untick stops, and reorder them with
 ↑/↓. **Оптимальный порядок** finds the shortest visiting order and keeps the first stop as the start. The route
 is drawn on the map with numbered stops, along with the total and per-leg distance and time.
 
 **Отправить в WhatsApp** opens WhatsApp with a ready message: the stops, the distances, and a Google Maps link
-that opens the whole route on the recipient's phone. **Скопировать** copies the same text. Routing comes from
-the free OpenStreetMap service at routing.openstreetmap.de (OSRM), and the code is in `src/lib/routing.js`. A
+that opens the whole route on the recipient's phone. **Скопировать** copies the same text. Walking, driving and cycling routes come
+from the free OpenStreetMap service at routing.openstreetmap.de (OSRM).
+
+Public transport comes from [Transitous](https://transitous.org), a free journey planner built on open
+timetables. Each leg is planned as its own journey from the chosen departure time, and the next leg starts
+when the previous one arrives. The tab shows each leg's lines (bus, tram, metro, train) with times. Rides are
+drawn in each line's colour and walks as dotted lines. Google Maps links can't carry intermediate stops for
+transit, so a transit route is shared with one Google Maps link per leg.
+
+The code is in `src/lib/routing.js` and `src/lib/transit.js`. A
 route takes up to 10 stops, because that is what a Google Maps directions link accepts.
 
 ### Map search suggestions

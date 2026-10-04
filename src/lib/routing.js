@@ -1,11 +1,14 @@
 // Routes between saved map pins, and sharing them.
-// Routing: the free OpenStreetMap routing service at routing.openstreetmap.de (OSRM; foot, car and bike profiles).
+// Walking, driving, cycling: the free OpenStreetMap routing service at routing.openstreetmap.de (OSRM).
+// Public transport: Transitous (see transit.js).
 import { allCities, distanceKm } from './locations';
+import { fetchTransitRoute, journeySummary } from './transit';
 
 export const ROUTE_MODES = {
   foot: { label: 'Пешком', short: 'Пешком', icon: '🚶', profile: 'routed-foot', google: 'walking' },
   car: { label: 'На машине', short: 'Машина', icon: '🚗', profile: 'routed-car', google: 'driving' },
   bike: { label: 'На велосипеде', short: 'Велосипед', icon: '🚲', profile: 'routed-bike', google: 'bicycling' },
+  transit: { label: 'На общественном транспорте', short: 'Транспорт', icon: '🚇', profile: null, google: 'transit' },
 };
 
 /** Google Maps directions links take an origin, a destination and up to 8 stops in between. */
@@ -46,26 +49,34 @@ async function osrm(path, signal) {
   return data;
 }
 
-/** Route through the stops in order: { distance (m), duration (s), legs: [{ distance, duration }], line: [[lat, lng], …] }. */
-export async function fetchRoute(stops, mode, signal) {
+/**
+ * Route through the stops in order:
+ * { distance (m, null for transit), duration (s), legs: [{ distance, duration, journey? }], segments, line: [[lat, lng], …] }.
+ * `departure` (Date) matters only for public transport.
+ */
+export async function fetchRoute(stops, mode, signal, departure = new Date()) {
+  if (mode === 'transit') return fetchTransitRoute(stops, departure, signal);
   const data = await osrm(
     `/${ROUTE_MODES[mode].profile}/route/v1/driving/${coordsParam(stops)}?overview=full&geometries=geojson`,
     signal,
   );
   const [route] = data.routes;
+  const line = route.geometry.coordinates.map(([lng, lat]) => [lat, lng]);
   return {
     distance: route.distance,
     duration: route.duration,
     legs: route.legs.map((l) => ({ distance: l.distance, duration: l.duration })),
-    line: route.geometry.coordinates.map(([lng, lat]) => [lat, lng]),
+    segments: [{ kind: 'drive', color: null, coords: line }],
+    line,
   };
 }
 
-/** Same stops in the shortest visiting order, starting from the first one. */
+/** Same stops in the shortest visiting order, starting from the first one (transit uses walking distances). */
 export async function optimizeOrder(stops, mode, signal) {
   if (stops.length < 3) return stops;
+  const profile = ROUTE_MODES[mode].profile ?? ROUTE_MODES.foot.profile;
   const data = await osrm(
-    `/${ROUTE_MODES[mode].profile}/trip/v1/driving/${coordsParam(stops)}?source=first&destination=any&roundtrip=false&overview=false`,
+    `/${profile}/trip/v1/driving/${coordsParam(stops)}?source=first&destination=any&roundtrip=false&overview=false`,
     signal,
   );
   return orderFromTrip(stops, data.waypoints);
@@ -93,7 +104,10 @@ export function formatTravelTime(seconds) {
   return m ? `${h} ч ${m} мин` : `${h} ч`;
 }
 
-/** Google Maps directions link (opens the route in the app on phones). */
+/**
+ * Google Maps directions link (opens the route in the app on phones).
+ * Google ignores intermediate stops for public transport, so transit routes are shared leg by leg.
+ */
 export function googleMapsUrl(stops, mode) {
   const point = (s) => `${s.lat.toFixed(6)},${s.lng.toFixed(6)}`;
   const params = new URLSearchParams({
@@ -106,20 +120,37 @@ export function googleMapsUrl(stops, mode) {
   return `https://www.google.com/maps/dir/?${params}`;
 }
 
+export const sharesLegByLeg = (mode, stops) => mode === 'transit' && stops.length > 2;
+
+const formatClock = (date) => new Date(date).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+
 /** Text of the route for messengers. */
-export function routeMessage({ city, stops, mode, route }) {
+export function routeMessage({ city, stops, mode, route, departure }) {
   const m = ROUTE_MODES[mode];
+  const total = route
+    ? [route.distance != null ? formatDistance(route.distance) : null, `≈ ${formatTravelTime(route.duration)}`].filter(Boolean).join(' · ')
+    : null;
+  const legText = (leg) => {
+    if (leg.journey) return `+≈ ${formatTravelTime(leg.duration)}: ${journeySummary(leg.journey)}`;
+    return `+${formatDistance(leg.distance)} · ${formatTravelTime(leg.duration)}`;
+  };
+  const links = sharesLegByLeg(mode, stops)
+    ? [
+        'Как добраться (Google Maps):',
+        ...stops.slice(1).map((s, i) => `${i + 1} → ${i + 2}: ${googleMapsUrl([stops[i], s], mode)}`),
+      ]
+    : ['Открыть маршрут в Google Maps:', googleMapsUrl(stops, mode)];
   const lines = [
     `🗺️ Маршрут: ${city.label} — ${m.label.toLowerCase()} ${m.icon}`,
-    route ? `${formatDistance(route.distance)} · ≈ ${formatTravelTime(route.duration)}` : null,
+    total,
+    mode === 'transit' && departure ? `Отправление в ${formatClock(departure)}` : null,
     '',
     ...stops.map((s, i) => {
       const leg = route && i > 0 ? route.legs[i - 1] : null;
-      return `${i + 1}. ${s.name}${leg ? ` (+${formatDistance(leg.distance)} · ${formatTravelTime(leg.duration)})` : ''}`;
+      return `${i + 1}. ${s.name}${leg ? ` (${legText(leg)})` : ''}`;
     }),
     '',
-    'Открыть маршрут в Google Maps:',
-    googleMapsUrl(stops, mode),
+    ...links,
   ];
   return lines.filter((l) => l !== null).join('\n');
 }

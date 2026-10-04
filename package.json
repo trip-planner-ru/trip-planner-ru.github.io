@@ -13,10 +13,10 @@
     "update:places": "node scripts/build-place-hints.mjs"
   },
   "dependencies": {
-    "leaflet": "^1.9.4",
+    "maplibre-gl": "^6.12.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "react-leaflet": "^5.0.0"
+    "react-map-gl": "^8.1.3"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",

@@ -9,8 +9,10 @@ import {
   optimizeOrder,
   pinsByCity,
   routeMessage,
+  sharesLegByLeg,
   whatsappUrl,
 } from '../lib/routing';
+import { journeySummary } from '../lib/transit';
 import { Button, Card, ExternalLink, Field, inputClass } from './ui';
 
 /**
@@ -23,6 +25,7 @@ export default function RoutePlanner({ markers, preferredCityId, onRouteChange, 
   const group = groups.find((g) => g.city.id === cityId) ?? groups.find((g) => g.city.id === preferredCityId) ?? groups[0];
 
   const [mode, setMode] = useState('foot');
+  const [departure, setDeparture] = useState(nowForInput); // public transport only
   const [order, setOrder] = useState([]); // pin ids, in visiting order
   const [skipped, setSkipped] = useState(() => new Set());
   const [state, setState] = useState({ status: 'idle' });
@@ -50,10 +53,10 @@ export default function RoutePlanner({ markers, preferredCityId, onRouteChange, 
     const controller = new AbortController();
     const timer = setTimeout(() => {
       setState((s) => ({ ...s, status: 'loading' }));
-      fetchRoute(stops, mode, controller.signal)
+      fetchRoute(stops, mode, controller.signal, new Date(departure))
         .then((route) => {
           setState({ status: 'done', route });
-          onRouteChange({ line: route.line, stopIds: stops.map((s) => s.id) });
+          onRouteChange({ segments: route.segments, line: route.line, stopIds: stops.map((s) => s.id) });
         })
         .catch((err) => err.name !== 'AbortError' && setState({ status: 'error', error: err.message }));
     }, 400);
@@ -61,7 +64,7 @@ export default function RoutePlanner({ markers, preferredCityId, onRouteChange, 
       clearTimeout(timer);
       controller.abort();
     };
-  }, [stopsKey, mode]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [stopsKey, mode, mode === 'transit' ? departure : '']); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => () => onRouteChange(null), []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -107,7 +110,9 @@ export default function RoutePlanner({ markers, preferredCityId, onRouteChange, 
   }
 
   const route = state.status === 'done' || state.status === 'loading' ? state.route : null;
-  const message = stops.length >= 2 ? routeMessage({ city: group.city, stops, mode, route }) : '';
+  const message =
+    stops.length >= 2 ? routeMessage({ city: group.city, stops, mode, route, departure: new Date(departure) }) : '';
+  const legByLeg = sharesLegByLeg(mode, stops);
   const stopNumber = new Map(stops.map((s, i) => [s.id, i + 1]));
 
   async function copy() {
@@ -139,7 +144,7 @@ export default function RoutePlanner({ markers, preferredCityId, onRouteChange, 
         </Field>
       )}
 
-      <div className="grid grid-cols-3 gap-1 rounded-xl bg-slate-900/5 p-1" role="radiogroup" aria-label="Как добираться">
+      <div className="grid grid-cols-4 gap-1 rounded-xl bg-slate-900/5 p-1" role="radiogroup" aria-label="Как добираться">
         {Object.entries(ROUTE_MODES).map(([id, m]) => (
           <button
             key={id}
@@ -147,12 +152,27 @@ export default function RoutePlanner({ markers, preferredCityId, onRouteChange, 
             role="radio"
             aria-checked={mode === id}
             onClick={() => setMode(id)}
-            className={`rounded-lg px-2 py-1.5 text-xs font-semibold transition ${mode === id ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500'}`}
+            title={m.label}
+            className={`flex flex-col items-center gap-0.5 rounded-lg px-1 py-1.5 text-[11px] font-semibold transition ${mode === id ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500'}`}
           >
-            <span aria-hidden>{m.icon}</span> {m.short}
+            <span aria-hidden className="text-base leading-none">
+              {m.icon}
+            </span>
+            {m.short}
           </button>
         ))}
       </div>
+
+      {mode === 'transit' && (
+        <Field label="Отправление">
+          <input
+            type="datetime-local"
+            className={inputClass}
+            value={departure}
+            onChange={(e) => e.target.value && setDeparture(e.target.value)}
+          />
+        </Field>
+      )}
 
       <ol className="space-y-1">
         {ordered.map((pin, i) => {
@@ -199,12 +219,31 @@ export default function RoutePlanner({ markers, preferredCityId, onRouteChange, 
       {route && stops.length >= 2 && (
         <div className={`space-y-3 rounded-xl bg-indigo-50/70 p-3 ${state.status === 'loading' ? 'opacity-60' : ''}`}>
           <p className="text-lg font-bold tracking-tight text-slate-900">
-            {formatDistance(route.distance)} · ≈ {formatTravelTime(route.duration)}
+            {route.distance != null && `${formatDistance(route.distance)} · `}≈ {formatTravelTime(route.duration)}
           </p>
-          <ul className="space-y-0.5 text-xs text-slate-600">
+          <ul className="space-y-1.5 text-xs text-slate-600">
             {route.legs.map((leg, i) => (
               <li key={i}>
-                {i + 1} → {i + 2}: {formatDistance(leg.distance)} · {formatTravelTime(leg.duration)}
+                <span className="font-semibold text-slate-800">
+                  {i + 1} → {i + 2}:
+                </span>{' '}
+                {leg.journey ? (
+                  <>
+                    {formatClock(leg.journey.departure)}–{formatClock(leg.journey.arrival)} · {journeySummary(leg.journey)}
+                    {legByLeg && (
+                      <a
+                        className="ml-1 font-semibold text-indigo-600 hover:underline"
+                        href={googleMapsUrl([stops[i], stops[i + 1]], mode)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Google Maps ↗
+                      </a>
+                    )}
+                  </>
+                ) : (
+                  `${formatDistance(leg.distance)} · ${formatTravelTime(leg.duration)}`
+                )}
               </li>
             ))}
           </ul>
@@ -216,15 +255,24 @@ export default function RoutePlanner({ markers, preferredCityId, onRouteChange, 
           >
             <WhatsAppIcon /> Отправить в WhatsApp
           </a>
-          <div className="grid grid-cols-2 gap-2">
+          <div className={`grid gap-2 ${legByLeg ? 'grid-cols-1' : 'grid-cols-2'}`}>
             <Button onClick={copy}>{copied ? '✓ Скопировано' : 'Скопировать'}</Button>
-            <ExternalLink href={googleMapsUrl(stops, mode)}>Google Maps</ExternalLink>
+            {!legByLeg && <ExternalLink href={googleMapsUrl(stops, mode)}>Google Maps</ExternalLink>}
           </div>
         </div>
       )}
     </Card>
   );
 }
+
+/** Current local time rounded up to 5 minutes, in the datetime-local input format. */
+function nowForInput() {
+  const d = new Date(Math.ceil(Date.now() / 300_000) * 300_000);
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+const formatClock = (iso) => new Date(iso).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
 
 function WhatsAppIcon() {
   return (

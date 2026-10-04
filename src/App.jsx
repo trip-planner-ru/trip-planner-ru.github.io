@@ -1,10 +1,13 @@
+import { lazy, Suspense } from 'react';
 import { useTrip } from './context/TripContext';
 import AirlinesTab from './components/AirlinesTab';
 import HotelsTab from './components/HotelsTab';
-import MapTab from './components/MapTab';
 import TripTab from './components/TripTab';
 import { formatDate, plural } from './lib/format';
 import { cityById } from './lib/locations';
+
+// The 3D map library is large, so it is loaded only when the Map tab is opened.
+const MapTab = lazy(() => import('./components/MapTab'));
 
 const TABS = [
   { id: 'flights', label: 'Авиакомпании', short: 'Рейсы', icon: '✈️' },
@@ -60,7 +63,11 @@ export default function App() {
         <div key={tab} className="animate-fade-up">
           {tab === 'flights' && <AirlinesTab />}
           {tab === 'hotels' && <HotelsTab />}
-          {tab === 'map' && <MapTab />}
+          {tab === 'map' && (
+            <Suspense fallback={<p className="py-20 text-center text-sm text-slate-500">Загружаю карту…</p>}>
+              <MapTab />
+            </Suspense>
+          )}
           {tab === 'trip' && <TripTab />}
         </div>
       </main>

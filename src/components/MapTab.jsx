@@ -1,11 +1,22 @@
 import { useEffect, useRef, useState } from 'react';
-import { MapContainer, Marker, Polyline, Popup, TileLayer, Tooltip, useMap, useMapEvents } from 'react-leaflet';
+import Map, { Layer, Marker, NavigationControl, Popup, Source } from 'react-map-gl/maplibre';
+import 'maplibre-gl/dist/maplibre-gl.css';
+import { setWorkerUrl } from 'maplibre-gl';
+// MapLibre builds its worker's address at runtime, which bundlers can't follow, so hand it a bundled copy.
+import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import { useTrip } from '../context/TripContext';
 import { cityById } from '../lib/locations';
-import { PIN_CATEGORIES, pinIcon } from '../lib/pins';
+import { PIN_CATEGORIES } from '../lib/pins';
 import MapSearch from './MapSearch';
 import RoutePlanner from './RoutePlanner';
 import { Button, Card, Field, inputClass } from './ui';
+
+setWorkerUrl(maplibreWorkerUrl);
+
+// Free vector map with 3D buildings, no key needed (https://openfreemap.org).
+const MAP_STYLE = 'https://tiles.openfreemap.org/styles/liberty';
+const VIEW_3D = { pitch: 60, bearing: -20 };
+const VIEW_2D = { pitch: 0, bearing: 0 };
 
 // Free OSM geocoder. Its usage policy allows on-submit search, not search-as-you-type.
 async function geocode(query, signal) {
@@ -15,49 +26,83 @@ async function geocode(query, signal) {
   return res.json();
 }
 
-function FocusController({ focus }) {
-  const map = useMap();
-  useEffect(() => {
-    if (focus) map.flyTo([focus.lat, focus.lng], focus.zoom ?? 15, { duration: 0.8 });
-  }, [focus, map]);
-  return null;
+/** Show street and place names in Russian where the map data has them, otherwise in the local language. */
+function applyRussianLabels(map) {
+  for (const layer of map.getStyle().layers) {
+    const text = layer.layout?.['text-field'];
+    if (layer.type === 'symbol' && text && JSON.stringify(text).includes('name')) {
+      map.setLayoutProperty(layer.id, 'text-field', ['coalesce', ['get', 'name:ru'], ['get', 'name']]);
+    }
+  }
 }
 
-/** Zoom the map to a newly built route (once per set of stops, not on every rebuild). */
-function FitRoute({ route }) {
-  const map = useMap();
-  const key = route?.stopIds.join();
-  useEffect(() => {
-    if (route?.line.length) map.fitBounds(route.line, { padding: [40, 40], maxZoom: 16 });
-  }, [key, map]); // eslint-disable-line react-hooks/exhaustive-deps
-  return null;
+function Pin({ category, draft = false, number }) {
+  const c = PIN_CATEGORIES[category] ?? PIN_CATEGORIES.other;
+  return (
+    <div className="relative -translate-y-[7px] cursor-pointer">
+      <div className={`pin${draft ? ' pin--draft' : ''}`} style={{ background: c.color }}>
+        <span>{c.emoji}</span>
+      </div>
+      {number != null && <span className="route-stop">{number}</span>}
+    </div>
+  );
 }
 
-function ClickToPin({ onPick }) {
-  useMapEvents({ click: (e) => onPick(e.latlng) });
-  return null;
+/** GeoJSON for the route: one feature per segment, so walking and rides can be drawn differently. */
+function routeGeoJson(route) {
+  return {
+    type: 'FeatureCollection',
+    features: route.segments.map((s) => ({
+      type: 'Feature',
+      properties: { kind: s.kind, color: s.color ?? '#4f46e5' },
+      geometry: { type: 'LineString', coordinates: s.coords.map(([lat, lng]) => [lng, lat]) },
+    })),
+  };
 }
 
 export default function MapTab() {
   const { search, markers, addMarker, removeMarker, mapFocus } = useTrip();
   const city = cityById(search.destinationCityId);
-  const [focus, setFocus] = useState(mapFocus);
+  const mapRef = useRef(null);
+  const [is3d, setIs3d] = useState(true);
+  const [popupId, setPopupId] = useState(null);
   const [draft, setDraft] = useState(null);
   const [results, setResults] = useState([]);
-  const [route, setRoute] = useState(null); // { line, stopIds } drawn on the map
+  const [route, setRoute] = useState(null); // { segments, line, stopIds } drawn on the map
   const [status, setStatus] = useState({ loading: false, error: null });
   const abortRef = useRef(null);
   const draftRef = useRef(null);
 
+  const flyTo = (lat, lng, zoom = 16) => mapRef.current?.flyTo({ center: [lng, lat], zoom, duration: 900 });
+
   useEffect(() => {
-    if (mapFocus) setFocus(mapFocus);
-  }, [mapFocus]);
+    if (mapFocus) flyTo(mapFocus.lat, mapFocus.lng, mapFocus.zoom);
+  }, [mapFocus]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (draft) draftRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }, [draft?.lat, draft?.lng]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const flyTo = (lat, lng, zoom = 16) => setFocus({ lat, lng, zoom, at: Date.now() });
+  // Zoom to a newly built route (once per set of stops, not on every rebuild).
+  const routeKey = route?.stopIds.join();
+  useEffect(() => {
+    if (!route?.line.length) return;
+    const lngs = route.line.map(([, lng]) => lng);
+    const lats = route.line.map(([lat]) => lat);
+    mapRef.current?.fitBounds(
+      [
+        [Math.min(...lngs), Math.min(...lats)],
+        [Math.max(...lngs), Math.max(...lats)],
+      ],
+      { padding: 70, maxZoom: 16, duration: 900 },
+    );
+  }, [routeKey]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  function toggle3d() {
+    const next = !is3d;
+    setIs3d(next);
+    mapRef.current?.easeTo({ ...(next ? VIEW_3D : VIEW_2D), duration: 800 });
+  }
 
   async function runSearch(query) {
     abortRef.current?.abort();
@@ -85,50 +130,111 @@ export default function MapTab() {
     setDraft(null);
   }
 
-  const center = mapFocus ? [mapFocus.lat, mapFocus.lng] : [city.lat, city.lng];
+  const start = mapFocus ?? { lat: city.lat, lng: city.lng, zoom: 14 };
+  const popupPin = markers.find((m) => m.id === popupId);
+  const stopNumber = (id) => (route?.stopIds.includes(id) ? route.stopIds.indexOf(id) + 1 : null);
 
   return (
     <div className="grid gap-4 lg:grid-cols-[1fr_360px]">
       <Card className="relative h-[60vh] overflow-hidden lg:h-[calc(100vh-12rem)]">
-        <MapContainer center={center} zoom={mapFocus ? 16 : 13} className="h-full w-full">
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; участники <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          />
-          <FocusController focus={focus} />
-          <ClickToPin onPick={({ lat, lng }) => setDraft((d) => ({ name: '', category: 'attraction', note: '', ...d, lat, lng }))} />
+        <Map
+          ref={mapRef}
+          mapStyle={MAP_STYLE}
+          initialViewState={{ latitude: start.lat, longitude: start.lng, zoom: start.zoom ?? 15, ...VIEW_3D }}
+          maxPitch={75}
+          onLoad={(e) => applyRussianLabels(e.target)}
+          onClick={(e) => {
+            setPopupId(null);
+            const { lat, lng } = e.lngLat;
+            setDraft((d) => ({ name: '', category: 'attraction', note: '', ...d, lat, lng }));
+          }}
+          style={{ width: '100%', height: '100%' }}
+        >
+          <NavigationControl position="top-left" visualizePitch />
 
           {route && (
-            <>
-              <Polyline positions={route.line} pathOptions={{ color: '#ffffff', weight: 9, opacity: 0.9 }} />
-              <Polyline positions={route.line} pathOptions={{ color: '#4f46e5', weight: 5, opacity: 0.9 }} />
-            </>
+            <Source id="route" type="geojson" data={routeGeoJson(route)}>
+              <Layer
+                id="route-casing"
+                type="line"
+                layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+                paint={{ 'line-color': '#ffffff', 'line-width': 9, 'line-opacity': 0.9 }}
+              />
+              <Layer
+                id="route-line"
+                type="line"
+                filter={['!=', ['get', 'kind'], 'walk']}
+                layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+                paint={{ 'line-color': ['get', 'color'], 'line-width': 5 }}
+              />
+              <Layer
+                id="route-walk"
+                type="line"
+                filter={['==', ['get', 'kind'], 'walk']}
+                layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+                paint={{ 'line-color': '#4f46e5', 'line-width': 4, 'line-dasharray': [0.2, 1.6] }}
+              />
+            </Source>
           )}
-          <FitRoute route={route} />
 
           {markers.map((m) => (
-            <Marker key={m.id} position={[m.lat, m.lng]} icon={pinIcon(m.category)}>
-              {route?.stopIds.includes(m.id) && (
-                <Tooltip permanent direction="top" offset={[0, -30]} className="route-stop">
-                  {route.stopIds.indexOf(m.id) + 1}
-                </Tooltip>
-              )}
-              <Popup>
-                <p className="!m-0 font-semibold">{m.name}</p>
-                <p className="!m-0 text-xs text-slate-500">{PIN_CATEGORIES[m.category]?.label}</p>
-                {m.note && <p className="!mb-0 !mt-1 text-sm">{m.note}</p>}
-                <button className="mt-2 text-xs text-rose-600" onClick={() => removeMarker(m.id)}>
-                  Удалить метку
-                </button>
-              </Popup>
+            <Marker
+              key={m.id}
+              latitude={m.lat}
+              longitude={m.lng}
+              anchor="bottom"
+              onClick={(e) => {
+                e.originalEvent.stopPropagation();
+                setPopupId(m.id);
+              }}
+            >
+              <Pin category={m.category} number={stopNumber(m.id)} />
             </Marker>
           ))}
 
-          {draft && <Marker position={[draft.lat, draft.lng]} icon={pinIcon(draft.category, true)} />}
-        </MapContainer>
+          {popupPin && (
+            <Popup
+              latitude={popupPin.lat}
+              longitude={popupPin.lng}
+              anchor="bottom"
+              offset={44}
+              closeOnClick={false}
+              onClose={() => setPopupId(null)}
+            >
+              <p className="font-semibold">{popupPin.name}</p>
+              <p className="text-xs text-slate-500">{PIN_CATEGORIES[popupPin.category]?.label}</p>
+              {popupPin.note && <p className="mt-1 text-sm">{popupPin.note}</p>}
+              <button
+                className="mt-2 text-xs text-rose-600"
+                onClick={() => {
+                  removeMarker(popupPin.id);
+                  setPopupId(null);
+                }}
+              >
+                Удалить метку
+              </button>
+            </Popup>
+          )}
+
+          {draft && (
+            <Marker latitude={draft.lat} longitude={draft.lng} anchor="bottom">
+              <Pin category={draft.category} draft />
+            </Marker>
+          )}
+        </Map>
+
+        <button
+          type="button"
+          onClick={toggle3d}
+          className="absolute right-3 top-3 z-10 rounded-xl bg-white/90 px-3 py-2 text-sm font-bold text-slate-800 shadow-md ring-1 ring-slate-200 backdrop-blur hover:bg-white"
+          aria-pressed={is3d}
+          title={is3d ? 'Плоская карта' : 'Объёмная карта'}
+        >
+          {is3d ? '2D' : '3D'}
+        </button>
         {!draft && (
-          <p className="pointer-events-none absolute bottom-4 left-1/2 z-[500] -translate-x-1/2 whitespace-nowrap rounded-full bg-slate-900/75 px-4 py-1.5 text-xs font-semibold text-white shadow-lg backdrop-blur">
-            Нажмите в любом месте карты, чтобы поставить метку
+          <p className="pointer-events-none absolute bottom-8 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-slate-900/75 px-4 py-1.5 text-xs font-semibold text-white shadow-lg backdrop-blur">
+            Нажмите на карту, чтобы поставить метку · наклон и поворот — правая кнопка мыши или два пальца
           </p>
         )}
       </Card>
@@ -159,7 +265,7 @@ export default function MapTab() {
               ))}
             </ul>
           )}
-          <Button variant="ghost" className="mt-2 px-0" onClick={() => flyTo(city.lat, city.lng, 13)}>
+          <Button variant="ghost" className="mt-2 px-0" onClick={() => flyTo(city.lat, city.lng, 14)}>
             ⌖ Показать город {city.label}
           </Button>
         </Card>
@@ -188,11 +294,7 @@ export default function MapTab() {
                 />
               </Field>
               <Field label="Тип">
-                <select
-                  className={inputClass}
-                  value={draft.category}
-                  onChange={(e) => setDraft({ ...draft, category: e.target.value })}
-                >
+                <select className={inputClass} value={draft.category} onChange={(e) => setDraft({ ...draft, category: e.target.value })}>
                   {Object.entries(PIN_CATEGORIES).map(([key, c]) => (
                     <option key={key} value={key}>
                       {c.emoji} {c.label}
@@ -201,12 +303,7 @@ export default function MapTab() {
                 </select>
               </Field>
               <Field label="Заметка">
-                <textarea
-                  className={inputClass}
-                  rows={2}
-                  value={draft.note}
-                  onChange={(e) => setDraft({ ...draft, note: e.target.value })}
-                />
+                <textarea className={inputClass} rows={2} value={draft.note} onChange={(e) => setDraft({ ...draft, note: e.target.value })} />
               </Field>
               <div className="flex gap-2">
                 <Button type="submit" variant="primary" className="flex-1">
@@ -233,7 +330,12 @@ export default function MapTab() {
                       {m.note && <span className="block truncate text-xs text-slate-500">{m.note}</span>}
                     </span>
                   </button>
-                  <Button variant="ghost" className="px-2 py-1 text-xs" aria-label={`Удалить ${m.name}`} onClick={() => removeMarker(m.id)}>
+                  <Button
+                    variant="ghost"
+                    className="px-2 py-1 text-xs"
+                    aria-label={`Удалить ${m.name}`}
+                    onClick={() => removeMarker(m.id)}
+                  >
                     ✕
                   </Button>
                 </li>
