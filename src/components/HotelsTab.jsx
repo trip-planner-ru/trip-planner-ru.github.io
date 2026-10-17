@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useTrip } from '../context/TripContext';
 import { addDays, formatDate, plural, stayFromSearch, todayISO } from '../lib/format';
 import { cityById } from '../lib/locations';
-import { FILL_LABELS, STAY_GROUPS, STAY_TOOLS, stayToolUrl } from '../lib/stays';
+import { BOOKING_HOME_URL, FILL_LABELS, STAY_GROUPS, STAY_TOOLS, stayToolUrl } from '../lib/stays';
 import LocationPicker from './LocationPicker';
 import { Badge, Card, ExternalLink, Field, inputClass, SectionTitle } from './ui';
 
@@ -85,6 +85,25 @@ export default function HotelsTab() {
           сайте сравнения цен, а потом загляните на сайт самой гостиницы — при бронировании напрямую гостиницы часто дают ту
           же цену и добавляют завтрак или бесплатную отмену.
         </p>
+      </Card>
+
+      <Card className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center">
+        <div
+          className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#003580] text-lg font-extrabold text-white shadow-md"
+          aria-hidden
+        >
+          B.
+        </div>
+        <div className="min-w-0 flex-1">
+          <h2 className="font-bold tracking-tight text-slate-900">Любая страна и город на Booking.com</h2>
+          <p className="text-sm text-slate-600">
+            Нужного направления нет в списке? Откройте Booking.com и выберите сами: там можно ввести любую страну, город,
+            район или название гостиницы, а также свои даты и число гостей.
+          </p>
+        </div>
+        <ExternalLink href={BOOKING_HOME_URL} variant="booking" className="shrink-0">
+          Открыть Booking.com
+        </ExternalLink>
       </Card>
 
       {STAY_GROUPS.map((group) => (

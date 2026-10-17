@@ -6,6 +6,9 @@
 
 const q = (params) => new URLSearchParams(params).toString();
 
+/** Booking.com home page in Russian: its own search box, for any country, city, district or hotel. */
+export const BOOKING_HOME_URL = 'https://www.booking.com/index.ru.html';
+
 export const STAY_GROUPS = [
   {
     id: 'booking',
